@@ -13,6 +13,8 @@ struct song_class {
     
     bool (*const equals)(const struct song this, const struct song song);
     
+    int (*const compare_to)(const struct song this, const struct song song);
+    
     char *(*const to_string)(const struct song this);
     
 };

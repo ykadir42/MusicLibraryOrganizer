@@ -6,37 +6,70 @@
 
 // TODO implement methods
 
-void init_song_library(struct song_node **const table) {
-    // TODO
-}
+#define membersize(type, member) (sizeof(((type *)0)->member))
+
+#define arraysize(array) (sizeof(array) / sizeof(*(array)))
 
 struct song_library *song_library_new() {
-    const struct song_library local = {.c = SongLibraryClass};
-    init_song_library(local.table);
-    struct song_library *dynamic = (struct song_library *) malloc(sizeof(struct song_library));
-    memcpy(dynamic, &local, sizeof(struct song_library));
+    struct song_library *dynamic = (struct song_library *) calloc(NULL, sizeof(struct song_library));
+    memcpy((struct song_library_class *) &dynamic->c, &SongLibraryClass, membersize(struct song_library, c));
     return dynamic;
 }
 
-void song_library_add_song(struct song_library *const this, const struct song song);
+void song_library_add_song(struct song_library *const this, const struct song song) {
+    struct song_node **const row_ptr = this->table + *song.artist;
+    struct song_node *const row = *row_ptr;
+    if (!row) {
+        *row_ptr = SongNodeClass.new(song, NULL);
+    } else {
+        *row_ptr = row->c.insert_in_order(row, song); // insert and update head in table
+    }
+}
 
-struct song song_library_find_by_name(struct song_library *const this, const char *const name);
+struct song song_library_find_by_name(const struct song_library *const this, const char *const name) {
+    for (size_t i = 0; i < arraysize(this->table); ++i) {
+        const struct song_node *const row = this->table[i];
+        const struct song song = row->c.find_by_name(row, name);
+        if (memcmp(&song, &(struct song) {}, sizeof(struct song)) != 0) {
+            return song;
+        }
+    }
+    return {};
+}
 
-struct song song_library_find_by_artist(struct song_library *const this, const char *const artist);
+struct song song_library_find_by_artist(const struct song_library *const this, const char *const artist) {
+    assert(artist);
+    const struct song_node *const row = this->table[*artist];
+    if (!row) {
+        return {};
+    }
+    return row->c.find_by_artist(row, artist);
+}
 
-void song_library_print_by_letter(struct song_library *const this, const char letter);
+void song_library_print_by_letter(const struct song_library *const this, const char letter);
 
-void song_library_print_by_artist(struct song_library *const this, const char *const artist);
+void song_library_print_by_artist(const struct song_library *const this, const char *const artist);
 
-void song_library_print(struct song_library *const this);
+void song_library_print(const struct song_library *const this);
 
-void song_library_shuffle_and_print(struct song_library *const this);
+void song_library_shuffle_and_print(const struct song_library *const this);
 
 void song_library_remove_song(struct song_library *const this, const struct song song);
 
-void song_library_remove_all_songs(struct song_library *const this);
+void song_library_remove_all_songs(struct song_library *const this) {
+    for (size_t i = 0; i < arraysize(this->table); ++i) {
+        struct song_node *const row = this->table[i];
+        if (row) {
+            row->c.free(row);
+        }
+    }
+    memset(this->table, 0, sizeof(this->table));
+}
 
-void song_library_free(struct song_library *const this);
+void song_library_free(struct song_library *const this) {
+    this->c.remove_all_songs(this);
+    free(this);
+}
 
 const struct song_library_class SongLibraryClass = {
         &song_library_new,

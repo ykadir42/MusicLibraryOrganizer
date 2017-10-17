@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <assert.h>
 
 struct song_node *song_node_new(const struct song song, struct song_node *const next) {
     const struct song_node local = {.c = SongNodeClass, .song = song, .next = next};
@@ -28,22 +29,33 @@ struct song_node *song_node_insert_front(const struct song_node *this, const str
     return front;
 }
 
-struct song_node *song_node_insert_in_order(struct song_node *this, const struct song song);
+struct song_node *song_node_insert_in_order(const struct song_node *const this, const struct song song) {
+    for (struct song_node *cur = this; cur; cur = cur->next) {
+        if (song.c.compare_to(song, cur->song) < 0) {
+            if (cur == this) {
+                return this->c.insert_front(this, song);
+            } else {
+                cur->next = cur->next->c.insert_front(cur->next, song);
+                return this;
+            }
+        }
+    }
+}
 
-void song_node_print(struct song_node *this) {
+void song_node_print(const struct song_node *this) {
     for (;this ; this = this->next) {
         printf("%s\n", this->song.c.to_string(this->song));
     }
 }
 
 #define find_by_(str_field) \
-struct song_node *song_node_find_by_##str_field(struct song_node *this, const char *const str_field) { \
+struct song song_node_find_by_##str_field(const struct song_node *this, const char *const str_field) { \
     for (; this; this = this->next) { \
         if (strcmp(str_field, this->song.str_field) == 0) { \
-            return this; \
+            return this->song; \
         } \
     } \
-    return NULL; \
+    return {}; \
 }
 
 find_by_(name)
@@ -52,12 +64,12 @@ find_by_(artist)
 
 #undef find_by_
 
-struct song_node *song_node_get(struct song_node *this, const size_t index) {
+struct song_node *song_node_get(const struct song_node *this, const size_t index) {
     for (size_t i = 0; i < index && this; ++i, this = this->next);
     return this;
 }
 
-struct song_node *song_node_get_random(struct song_node *this) {
+struct song_node *song_node_get_random(const struct song_node *this) {
     return this->c.get(this, rand() % this->c.length(this));
 }
 

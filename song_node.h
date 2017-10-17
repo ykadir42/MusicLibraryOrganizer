@@ -17,17 +17,17 @@ struct song_node_class {
     
     struct song_node *(*const insert_front)(const struct song_node *const this, const struct song song);
     
-    struct song_node *(*const insert_in_order)(struct song_node *this, const struct song song);
+    struct song_node *(*const insert_in_order)(const struct song_node *this, const struct song song);
     
-    void (*const print)(struct song_node *this);
+    void (*const print)(const struct song_node *this);
     
-    struct song_node *(*const find_by_name)(struct song_node *this, const char *const name);
+    struct song (*const find_by_name)(const struct song_node *this, const char *const name);
     
-    struct song_node *(*const find_by_artist)(struct song_node *this, const char *const artist);
+    struct song (*const find_by_artist)(const struct song_node *this, const char *const artist);
     
-    struct song_node *(*const get)(struct song_node *this, const size_t index);
+    struct song_node *(*const get)(const struct song_node *this, const size_t index);
     
-    struct song_node *(*const get_random)(struct song_node *this);
+    struct song_node *(*const get_random)(const struct song_node *this);
     
     struct song_node *(*const remove_front)(struct song_node *this);
     
