@@ -35,6 +35,12 @@ char *song_to_string(const struct song this) {
     sprintf(s, "%s by %s", this.name, this.artist);
 }
 
+void print(const struct song this) {
+    char *const s = this.c.to_string(this);
+    printf("%s\n", s);
+    free(s);
+}
+
 const struct song_class SongClass = {
         &song_new,
         &song_equals,

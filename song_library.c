@@ -16,8 +16,12 @@ struct song_library *song_library_new() {
     return dynamic;
 }
 
+struct song_node *song_library_songs_by_letter(const struct song_library *const this, const char letter) {
+    return this->table[(unsigned char) letter];
+}
+
 void song_library_add_song(struct song_library *const this, const struct song song) {
-    struct song_node **const row_ptr = this->table + *song.artist;
+    struct song_node **const row_ptr = this->table + (unsigned char) *song.artist;
     struct song_node *const row = *row_ptr;
     if (!row) {
         *row_ptr = SongNodeClass.new(song, NULL);
@@ -39,22 +43,57 @@ struct song song_library_find_by_name(const struct song_library *const this, con
 
 struct song song_library_find_by_artist(const struct song_library *const this, const char *const artist) {
     assert(artist);
-    const struct song_node *const row = this->table[*artist];
+    const struct song_node *const row = this->c.songs_by_letter(this, *artist);
     if (!row) {
         return {};
     }
     return row->c.find_by_artist(row, artist);
 }
 
-void song_library_print_by_letter(const struct song_library *const this, const char letter);
+void song_library_print_by_letter(const struct song_library *const this, const char letter) {
+    const struct song_node *const row = this->c.songs_by_letter(this, letter);
+    if (row) {
+        row->c.print(row);
+    }
+}
 
-void song_library_print_by_artist(const struct song_library *const this, const char *const artist);
+void song_library_print_by_artist(const struct song_library *const this, const char *const artist) {
+    const struct song_node *cur = this->c.songs_by_letter(this, *artist);
+    for (; cur; cur = cur->next) {
+        if (strcmp(artist, cur->song.artist) == 0) {
+            break;
+        }
+    }
+    // alphabetized, so this is allowed (stopping when given artist isn't the current song anymore)
+    for (; cur; cur = cur->next) {
+        if (strcmp(artist, cur->song.artist) != 0) {
+            break;
+        }
+        cur->song.c.print(cur->song);
+    }
+}
 
-void song_library_print(const struct song_library *const this);
+void song_library_print(const struct song_library *const this) {
+    for (size_t i = 0; i < arraysize(this->table); ++i) {
+        const struct song_node *const row = this->table[i];
+        if (row) {
+            row->c.print(row);
+        }
+    }
+}
 
-void song_library_shuffle_and_print(const struct song_library *const this);
+void song_library_shuffle_and_print(const struct song_library *const this) {
+    // TODO
+}
 
-void song_library_remove_song(struct song_library *const this, const struct song song);
+void song_library_remove_song(struct song_library *const this, const struct song song) {
+    for (size_t i = 0; i < arraysize(this->table); ++i) {
+        struct song_node *const row = this->table[i];
+        if (row) {
+            this->table[i] = row->c.remove_song(row, song);
+        }
+    }
+}
 
 void song_library_remove_all_songs(struct song_library *const this) {
     for (size_t i = 0; i < arraysize(this->table); ++i) {
@@ -73,6 +112,7 @@ void song_library_free(struct song_library *const this) {
 
 const struct song_library_class SongLibraryClass = {
         &song_library_new,
+        &song_library_songs_by_letter,
         &song_library_add_song,
         &song_library_find_by_name,
         &song_library_find_by_artist,

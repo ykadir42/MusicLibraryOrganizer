@@ -44,7 +44,7 @@ struct song_node *song_node_insert_in_order(const struct song_node *const this, 
 
 void song_node_print(const struct song_node *this) {
     for (;this ; this = this->next) {
-        printf("%s\n", this->song.c.to_string(this->song));
+        this->song.c.print(this->song);
     }
 }
 

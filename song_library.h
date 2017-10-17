@@ -11,25 +11,27 @@ struct song_library_class {
     
     struct song_library *(*const new)();
     
-    void (*const add_song)(struct song_library *const song_library, const struct song song);
+    struct song_node *(*const songs_by_letter)(const struct song_library *const this, const char letter);
     
-    struct song (*const find_by_name)(const struct song_library *const song_library, const char *const name);
+    void (*const add_song)(struct song_library *const this, const struct song song);
     
-    struct song (*const find_by_artist)(const struct song_library *const song_library, const char *const artist);
+    struct song (*const find_by_name)(const struct song_library *const this, const char *const name);
     
-    void (*const print_by_letter)(const struct song_library *const song_library, const char letter);
+    struct song (*const find_by_artist)(const struct song_library *const this, const char *const artist);
     
-    void (*const print_by_artist)(const struct song_library *const song_library, const char *const artist);
+    void (*const print_by_letter)(const struct song_library *const this, const char letter);
     
-    void (*const print)(const struct song_library *const song_library);
+    void (*const print_by_artist)(const struct song_library *const this, const char *const artist);
     
-    void (*const shuffle_and_print)(const struct song_library *const song_library);
+    void (*const print)(const struct song_library *const this);
     
-    void (*const remove_song)(struct song_library *const song_library, const struct song song);
+    void (*const shuffle_and_print)(const struct song_library *const this);
     
-    void (*const remove_all_songs)(struct song_library *const song_library);
+    void (*const remove_song)(struct song_library *const this, const struct song song);
     
-    void (*const free)(struct song_library *const song_library);
+    void (*const remove_all_songs)(struct song_library *const this);
+    
+    void (*const free)(struct song_library *const this);
     
 };
 

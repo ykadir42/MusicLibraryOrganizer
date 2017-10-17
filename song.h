@@ -17,6 +17,8 @@ struct song_class {
     
     char *(*const to_string)(const struct song this);
     
+    void (*const print)(const struct song this);
+    
 };
 
 struct song {
