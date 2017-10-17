@@ -7,47 +7,44 @@
 
 #include <stddef.h>
 
+#include "song.h"
+
 struct song_node_class {
     
-    struct song_node *(*const insert_front)(struct song_node *songs, const struct song song);
+    struct song_node *(*const new)(const struct song song, struct song_node *const next);
     
-    struct song_node *(*const insert_in_order)(struct song_node *songs, const struct song song);
+    size_t (*const length)(const struct song_node *this);
     
-    void (*const print)(struct song_node *songs);
+    struct song_node *(*const insert_front)(const struct song_node *const this, const struct song song);
     
-    struct song_node *(*const find_by_name)(struct song_node *songs, const char *const name);
+    struct song_node *(*const insert_in_order)(struct song_node *this, const struct song song);
     
-    struct song_node *(*const find_by_artist)(struct song_node *songs, const char *const artists);
+    void (*const print)(struct song_node *this);
     
-    struct song_node *(*const get)(struct song_node *songs, const size_t index);
+    struct song_node *(*const find_by_name)(struct song_node *this, const char *const name);
     
-    struct song_node *(*const get_random)(struct song_node *songs);
+    struct song_node *(*const find_by_artist)(struct song_node *this, const char *const artist);
     
-    struct song_node *(*const remove_front)(struct song_node *songs);
+    struct song_node *(*const get)(struct song_node *this, const size_t index);
     
-    struct song_node *(*const remove_song)(struct song_node *songs, const struct song);
+    struct song_node *(*const get_random)(struct song_node *this);
     
-    struct song_node *(*const free)(struct song_node *songs);
+    struct song_node *(*const remove_front)(struct song_node *this);
     
-};
-
-struct song {
+    struct song_node *(*const remove_song)(struct song_node *const this, const struct song);
     
-    const char *const name;
-    const char *const artist;
+    struct song_node *(*const free)(struct song_node *this);
     
 };
 
 struct song_node {
     
     const struct song_node_class c;
-    const struct song song;
+    struct song song;
     struct song_node *next;
     
 };
 
 extern const struct song_node_class SongNodeClass;
-
-struct song_node *new_song_node(const struct song song, struct song_node *const next);
 
 #endif //SYSTEMS_SONG_NODE_H

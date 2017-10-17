@@ -9,6 +9,8 @@
 
 struct song_library_class {
     
+    struct song_library *(*const new)();
+    
     void (*const add_song)(struct song_library *const song_library, const struct song song);
     
     struct song (*const find_by_name)(struct song_library *const song_library, const char *const name);
@@ -37,7 +39,5 @@ struct song_library {
 };
 
 extern const struct song_library_class SongLibraryClass;
-
-struct song_library *new_song_library();
 
 #endif //SYSTEMS_SONG_LIBRARY_H
