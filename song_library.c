@@ -44,6 +44,10 @@ void song_library_add_song(struct song_library *const this, const struct song so
     this->num_songs++;
 }
 
+// needed b/c header not on school computers for some reason
+#include <sys/types.h>
+ssize_t getline(char **lineptr, size_t *n, FILE *stream); // NOLINT
+
 #define BUF_SIZE 1024
 
 int song_library_add_songs_from_csv(struct song_library *const this, const char *const filename) {

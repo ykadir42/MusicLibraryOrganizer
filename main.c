@@ -64,10 +64,6 @@ void test_library() {
     library->c->print(library);
     p("printed library");
     
-    
-    
-    
-    
     library->c->free(library);
 }
 
