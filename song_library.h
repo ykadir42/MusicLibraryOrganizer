@@ -5,7 +5,7 @@
 #ifndef SYSTEMS_SONG_LIBRARY_H
 #define SYSTEMS_SONG_LIBRARY_H
 
-#include "song_node.c"
+#include "song_node.h"
 
 struct song_library_class {
     
@@ -17,7 +17,7 @@ struct song_library_class {
     
     struct song (*const find_by_name)(const struct song_library *const this, const char *const name);
     
-    struct song (*const find_by_artist)(const struct song_library *const this, const char *const artist);
+    const struct song_node *(*const find_by_artist)(const struct song_library *const this, const char *const artist);
     
     void (*const print_by_letter)(const struct song_library *const this, const char letter);
     
@@ -25,7 +25,7 @@ struct song_library_class {
     
     void (*const print)(const struct song_library *const this);
     
-    void (*const shuffle_and_print)(const struct song_library *const this);
+    void (*const shuffle_and_print)(const struct song_library *const this, const size_t num_songs);
     
     void (*const remove_song)(struct song_library *const this, const struct song song);
     
@@ -35,9 +35,15 @@ struct song_library_class {
     
 };
 
+#define SONG_TABLE_LENGTH 1 << (8 * sizeof(char))
+
 struct song_library {
-    const struct song_library_class c;
-    struct song_node *table[1 << sizeof(char)]; // 256
+    
+    const struct song_library_class *const c;
+    struct song_node *table[SONG_TABLE_LENGTH]; // 256
+    size_t lengths[SONG_TABLE_LENGTH];
+    size_t num_songs;
+    
 };
 
 extern const struct song_library_class SongLibraryClass;

@@ -23,7 +23,7 @@ struct song_class {
 
 struct song {
     
-    const struct song_class c;
+    const struct song_class *const c;
     
     const char *const name;
     const char *const artist;

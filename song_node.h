@@ -11,7 +11,7 @@
 
 struct song_node_class {
     
-    struct song_node *(*const new)(const struct song song, struct song_node *const next);
+    struct song_node *(*const new)(const struct song song, const struct song_node *const next);
     
     size_t (*const length)(const struct song_node *this);
     
@@ -21,13 +21,15 @@ struct song_node_class {
     
     void (*const print)(const struct song_node *this);
     
-    struct song (*const find_by_name)(const struct song_node *this, const char *const name);
+    const struct song_node *(*const find_by_name)(const struct song_node *this, const char *const name);
     
-    struct song (*const find_by_artist)(const struct song_node *this, const char *const artist);
+    const struct song_node *(*const find_by_artist)(const struct song_node *this, const char *const artist);
     
-    struct song_node *(*const get)(const struct song_node *this, const size_t index);
+    const struct song_node *(*const get)(const struct song_node *this, const size_t index);
     
-    struct song_node *(*const get_random)(const struct song_node *this);
+    const struct song_node *(*const get_random_with_length)(const struct song_node *this, const size_t length);
+    
+    const struct song_node *(*const get_random)(const struct song_node *this);
     
     struct song_node *(*const remove_front)(struct song_node *this);
     
@@ -39,7 +41,7 @@ struct song_node_class {
 
 struct song_node {
     
-    const struct song_node_class c;
+    const struct song_node_class *const c;
     struct song song;
     struct song_node *next;
     

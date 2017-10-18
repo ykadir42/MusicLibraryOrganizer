@@ -14,11 +14,11 @@ struct song song_new(const char *const name, const char *const artist) {
     assert(artist);
     assert(*name);
     assert(*artist);
-    return {.c = SongClass, .name = name, .artist = artist};
+    return (struct song) {.c = &SongClass, .name = name, .artist = artist};
 }
 
 bool song_equals(const struct song this, const struct song song) {
-    return strcmp(this.name, song.name) == 0 && strcmp(this.artist, song.artist);
+    return strcmp(this.name, song.name) == 0 && strcmp(this.artist, song.artist) == 0;
 }
 
 int song_compare_to(const struct song this, const struct song song) {
@@ -30,15 +30,20 @@ int song_compare_to(const struct song this, const struct song song) {
 }
 
 char *song_to_string(const struct song this) {
-    const size_t new_length = strlen(this.name) + strlen(" by ") + strlen(this.artist);
+//    printf("to_stringing song\n");
+    const size_t new_length = strlen(this.name) + strlen(" by ") + strlen(this.artist) + 100;
     char *const s = (char *) malloc((new_length + 1) * sizeof(char));
     sprintf(s, "%s by %s", this.name, this.artist);
+//    printf("to_stringed song\n");
+    return s;
 }
 
-void print(const struct song this) {
-    char *const s = this.c.to_string(this);
+void song_print(const struct song this) {
+//    printf("printing song\n");
+    char *const s = this.c->to_string(this);
     printf("%s\n", s);
     free(s);
+//    printf("printed song\n");
 }
 
 const struct song_class SongClass = {
@@ -46,4 +51,5 @@ const struct song_class SongClass = {
         &song_equals,
         &song_compare_to,
         &song_to_string,
+        &song_print,
 };
