@@ -27,6 +27,8 @@ void test_song_node() {
     printf("%p\n", node);
     //node = node->c->insert_in_order(node, song3);
     node->c->print(node);
+    
+    node->c->free(node);
 }
 
 void test_library() {
@@ -61,6 +63,12 @@ void test_library() {
     p("printing library");
     library->c->print(library);
     p("printed library");
+    
+    
+    
+    
+    
+    library->c->free(library);
 }
 
 int main() {

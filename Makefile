@@ -1,4 +1,4 @@
-CC = gcc -ggdb -std=c99 -Wall -Werror -O3
+CC = gcc -ggdb3 -std=c99 -Wall -Werror -O3
 
 song.o:
 	$(CC) -c song.c

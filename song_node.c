@@ -105,8 +105,8 @@ struct song_node *song_node_remove_song(struct song_node *const this, const stru
 struct song_node *song_node_free(struct song_node *this) {
     for (;;) {
         struct song_node *const next = this->next;
-        free(this);
         this->song.c->free(this->song);
+        free(this);
         if (!next) {
             return NULL;
         }
