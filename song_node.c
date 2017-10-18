@@ -38,6 +38,10 @@ struct song_node *song_node_insert_in_order(const struct song_node *const this, 
                 return (struct song_node *) this;
             }
         }
+        if (!cur->next) { // at end
+            cur->next = SongNodeClass.new(song, NULL);
+            return (struct song_node *) this;
+        }
     }
     return NULL; // UNREACHABLE
 }
@@ -102,6 +106,7 @@ struct song_node *song_node_free(struct song_node *this) {
     for (;;) {
         struct song_node *const next = this->next;
         free(this);
+        this->song.c->free(this->song);
         if (!next) {
             return NULL;
         }

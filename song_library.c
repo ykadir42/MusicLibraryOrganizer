@@ -32,12 +32,43 @@ void song_library_add_song(struct song_library *const this, const struct song so
     struct song_node **const row_ptr = this->table + i;
     struct song_node *const row = *row_ptr;
     if (!row) {
+        printf("adding song to new linked list\n");
         *row_ptr = SongNodeClass.new(song, NULL);
     } else {
+        printf("adding song to existing linked list\n");
         *row_ptr = row->c->insert_in_order(row, song); // insert and update head in table
+        printf("%p\n", (*row_ptr)->c);
+        (*row_ptr)->c->print(*row_ptr);
     }
     this->lengths[i]++;
     this->num_songs++;
+}
+
+#define BUF_SIZE 1024
+
+int song_library_add_songs_from_csv(struct song_library *const this, const char *const filename) {
+    FILE *const file = fopen(filename, "r");
+    if (!file) {
+        return EXIT_FAILURE;
+    }
+    char *buf = (char *) malloc(BUF_SIZE * sizeof(char));
+    const char delim = ',';
+    const char newline = '\n';
+    for (;;) {
+        size_t length;
+        if (getline(&buf, &length, file) < 0) {
+            goto error;
+        }
+        const char *name = strtok(buf, &delim);
+        const char *artist = strtok(NULL, &newline);
+        printf("adding song: %s by %s\n", name, artist);
+        this->c->add_song(this, SongClass.new(name, artist));
+    }
+    
+    error:
+    free(buf);
+    fclose(file);
+    return EXIT_SUCCESS;
 }
 
 struct song song_library_find_by_name(const struct song_library *const this, const char *const name) {
@@ -49,7 +80,7 @@ struct song song_library_find_by_name(const struct song_library *const this, con
             return found->song;
         }
     }
-    return (struct song) {};
+    return (struct song) {0};
 }
 
 const struct song_node *song_library_find_by_artist(const struct song_library *const this, const char *const artist) {
@@ -140,6 +171,7 @@ const struct song_library_class SongLibraryClass = {
         &song_library_new,
         &song_library_songs_by_letter,
         &song_library_add_song,
+        &song_library_add_songs_from_csv,
         &song_library_find_by_name,
         &song_library_find_by_artist,
         &song_library_print_by_letter,

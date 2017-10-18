@@ -12,7 +12,24 @@
 
 #define p(s) printf(s"\n");
 
-int main() {
+void test_song_node() {
+    typedef struct song_node SongNode;
+    typedef struct song Song;
+    
+    Song song1 = SongClass.new("Name", "Artists");
+    Song song2 = SongClass.new("Hello", "World");
+    //Song song3 = SongClass.new("Song", "Bob");
+    
+    p("inserting in order");
+    
+    SongNode *node = SongNodeClass.new(song1, NULL);
+    node = node->c->insert_in_order(node, song2);
+    printf("%p\n", node);
+    //node = node->c->insert_in_order(node, song3);
+    node->c->print(node);
+}
+
+void test_library() {
     srand((unsigned int) time(NULL));
     
     p("creating library")
@@ -35,13 +52,21 @@ int main() {
     printf("%p\n", node);
     const struct song song2 = node->song;
     song2.c->print(song2);
+
+//    library->c->add_song(library, SongClass.new("Hello", "World"));
+//    library->c->add_song(library, SongClass.new("Khyber", "Sen"));
     
-    library->c->add_song(library, SongClass.new("Hello", "World"));
-    library->c->add_song(library, SongClass.new("Khyber", "Sen"));
+    library->c->add_songs_from_csv(library, "songs.csv");
     
     p("printing library");
     library->c->print(library);
     p("printed library");
+}
+
+int main() {
+    test_song_node();
     
-    return 0;
+    test_library();
+    
+    return EXIT_SUCCESS;
 }

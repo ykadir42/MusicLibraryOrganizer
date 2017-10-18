@@ -15,6 +15,8 @@ struct song_library_class {
     
     void (*const add_song)(struct song_library *const this, const struct song song);
     
+    int (*const add_songs_from_csv)(struct song_library *const this, const char *const filename);
+    
     struct song (*const find_by_name)(const struct song_library *const this, const char *const name);
     
     const struct song_node *(*const find_by_artist)(const struct song_library *const this, const char *const artist);

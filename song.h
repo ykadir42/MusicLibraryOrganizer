@@ -19,6 +19,8 @@ struct song_class {
     
     void (*const print)(const struct song this);
     
+    void (*const free)(const struct song this);
+    
 };
 
 struct song {

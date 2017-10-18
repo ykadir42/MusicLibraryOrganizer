@@ -9,12 +9,18 @@
 #include <stdio.h>
 #include <assert.h>
 
+static inline char *new_strcpy(const char *const s) {
+    char *const copy = (char *) malloc((strlen(s) + 1) * sizeof(char));
+    strcpy(copy, s);
+    return copy;
+}
+
 struct song song_new(const char *const name, const char *const artist) {
     assert(name);
     assert(artist);
     assert(*name);
     assert(*artist);
-    return (struct song) {.c = &SongClass, .name = name, .artist = artist};
+    return (struct song) {.c = &SongClass, .name = new_strcpy(name), .artist = new_strcpy(artist)};
 }
 
 bool song_equals(const struct song this, const struct song song) {
@@ -46,10 +52,16 @@ void song_print(const struct song this) {
 //    printf("printed song\n");
 }
 
+void song_free(const struct song this) {
+    free((char *) this.artist);
+    free((char *) this.name);
+}
+
 const struct song_class SongClass = {
         &song_new,
         &song_equals,
         &song_compare_to,
         &song_to_string,
         &song_print,
+        &song_free,
 };
