@@ -86,16 +86,16 @@ int song_library_add_songs_from_csv(struct song_library *const this, const char 
     return EXIT_SUCCESS;
 }
 
-struct song song_library_find_by_name(const struct song_library *const this, const char *const name) {
+const struct song_node *song_library_find_by_name(const struct song_library *const this, const char *const name) {
     assert(name);
     for (size_t i = 0; i < arraysize(this->table); ++i) {
         const struct song_node *const row = this->table[i];
         const struct song_node *const found = row->c->find_by_name(row, name);
         if (found) {
-            return found->song;
+            return found;
         }
     }
-    return (struct song) {0};
+    return NULL;
 }
 
 const struct song_node *song_library_find_by_artist(const struct song_library *const this, const char *const artist) {
@@ -105,6 +105,11 @@ const struct song_node *song_library_find_by_artist(const struct song_library *c
         return NULL;
     }
     return row->c->find_by_artist(row, artist);
+}
+
+const struct song_node *song_library_find_song(const struct song_library *const this, const struct song song) {
+    const struct song_node *songs_by_artist = this->c->find_by_artist(this, song.artist);
+    return songs_by_artist->c->find_by_name(songs_by_artist, song.name);
 }
 
 void song_library_print_by_letter(const struct song_library *const this, const char letter) {
@@ -187,8 +192,9 @@ const struct song_library_class SongLibraryClass = {
         &song_library_songs_by_artist_letter,
         &song_library_add_song,
         &song_library_add_songs_from_csv,
-        &song_library_find_by_name,
         &song_library_find_by_artist,
+        &song_library_find_by_name,
+        &song_library_find_song,
         &song_library_print_by_letter,
         &song_library_print_by_artist,
         &song_library_print,

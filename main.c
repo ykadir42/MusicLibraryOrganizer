@@ -12,7 +12,9 @@
 
 #define DEBUG false
 
-#define p(s) printf(s"\n");
+#define p(s) printf(s"\n")
+
+#define pn() p("")
 
 void debug_song_node() {
     typedef struct song_node SongNode;
@@ -34,13 +36,13 @@ void debug_song_node() {
 }
 
 void debug_library() {
-    p("creating library")
+    p("creating library");
     struct song_library *const library = SongLibraryClass.new();
     p("created library");
     
     p("creating song1");
     const struct song song1 = SongClass.new("Title", "Artist");
-    p("created song1")
+    p("created song1");
     
     p("printing song1");
     song1.c->print(song1);
@@ -78,18 +80,33 @@ void test_song_library() {
     
     p("Testing song_library constructor");
     struct song_library *const library = SongLibraryClass.new();
+    pn();
     
     p("Testing song_library.add_songs_from_csv(),");
     p("\twhich tests song_library.add_song");
     library->c->add_songs_from_csv(library, "songs.csv");
+    pn();
     
     p("Testing song_library.print(),");
     p("\tshould print all songs in alphabetic order by artist, then song name");
     library->c->print(library);
+    pn();
     
-    p("Testing song_library.print(),");
-    p("\tshould print all songs in alphabetic order by artist, then song name");
-    library->c->print(library);
+    p("Testing song_library.print_by_letter('A'),");
+    p("\tshould print all songs by 'A' in alphabetic order");
+    library->c->print_by_letter(library, 'A');
+    pn();
+    
+    p("Testing song_library.print_by_artist(\"Alz\"),");
+    p("\tshould print all songs by \"Alz\" in alphabetic order");
+    library->c->print_by_artist(library, "Alz");
+    pn();
+    
+    library->c.fi
+    
+    p("Testing song_library.free()");
+    library->c->free(library);
+    pn();
 }
 
 int main() {
