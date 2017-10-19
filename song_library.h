@@ -11,7 +11,7 @@ struct song_library_class {
     
     struct song_library *(*const new)();
     
-    struct song_node *(*const songs_by_letter)(const struct song_library *const this, const char letter);
+    struct song_node *(*const songs_by_artist_letter)(const struct song_library *const this, const char letter);
     
     void (*const add_song)(struct song_library *const this, const struct song song);
     

@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 struct song_node *song_node_new(const struct song song, const struct song_node *const next) {
     const struct song_node local = {.c = &SongNodeClass, .song = song, .next = (struct song_node *const) next};
@@ -25,14 +26,24 @@ struct song_node *song_node_insert_front(const struct song_node *const this, con
 }
 
 struct song_node *song_node_insert_in_order(const struct song_node *const this, const struct song song) {
-    for (struct song_node *cur = (struct song_node *) this; cur; cur = cur->next) {
+    const bool is_A = *song.artist == 'A';
+    if (is_A) {
+        printf("A: ");
+        song.c->print(song);
+    }
+    printf("inserting in order\n");
+    #define SongName(when) if (song.name[0] == 'S') printf("inserting "#when"\n")
+    for (struct song_node *prev = NULL, *cur = (struct song_node *) this; cur; prev = cur, cur = cur->next) {
         if (song.c->compare_to(song, cur->song) < 0) {
-            if (cur == this) {
+            if (!prev) {
+                SongName(front);
                 return this->c->insert_front(this, song);
             } else {
-                if (cur->next) {
-                    cur->next = cur->next->c->insert_front(cur->next, song);
+                if (prev->next) {
+                    SongName(middle);
+                    prev->next = cur->c->insert_front(cur, song);
                 } else {
+                    SongName(end);
                     cur->next = SongNodeClass.new(song, NULL);
                 }
                 return (struct song_node *) this;

@@ -22,7 +22,7 @@ struct song_library *song_library_new() {
     return dynamic;
 }
 
-struct song_node *song_library_songs_by_letter(const struct song_library *const this, const char letter) {
+struct song_node *song_library_songs_by_artist_letter(const struct song_library *const this, const char letter) {
     return this->table[(unsigned char) letter];
 }
 
@@ -88,7 +88,7 @@ struct song song_library_find_by_name(const struct song_library *const this, con
 
 const struct song_node *song_library_find_by_artist(const struct song_library *const this, const char *const artist) {
     assert(artist);
-    const struct song_node *const row = this->c->songs_by_letter(this, *artist);
+    const struct song_node *const row = this->c->songs_by_artist_letter(this, *artist);
     if (!row) {
         return NULL;
     }
@@ -96,7 +96,7 @@ const struct song_node *song_library_find_by_artist(const struct song_library *c
 }
 
 void song_library_print_by_letter(const struct song_library *const this, const char letter) {
-    const struct song_node *const row = this->c->songs_by_letter(this, letter);
+    const struct song_node *const row = this->c->songs_by_artist_letter(this, letter);
     if (row) {
         row->c->print(row);
     }
@@ -172,7 +172,7 @@ void song_library_free(struct song_library *const this) {
 
 const struct song_library_class SongLibraryClass = {
         &song_library_new,
-        &song_library_songs_by_letter,
+        &song_library_songs_by_artist_letter,
         &song_library_add_song,
         &song_library_add_songs_from_csv,
         &song_library_find_by_name,

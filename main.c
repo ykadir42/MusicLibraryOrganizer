@@ -49,11 +49,6 @@ void test_library() {
     p("adding song1");
     library->c->add_song(library, song1);
     p("added song1");
-    
-    const struct song_node *node = library->c->songs_by_letter(library, 'A');
-    printf("%p\n", node);
-    const struct song song2 = node->song;
-    song2.c->print(song2);
 
 //    library->c->add_song(library, SongClass.new("Hello", "World"));
 //    library->c->add_song(library, SongClass.new("Khyber", "Sen"));
@@ -64,7 +59,11 @@ void test_library() {
     library->c->print(library);
     p("printed library");
     
+    const struct song_node *node = library->c->songs_by_artist_letter(library, 'A');
+    node->c->print(node);
+    
     library->c->free(library);
+    
 }
 
 int main() {

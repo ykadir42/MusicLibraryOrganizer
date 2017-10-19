@@ -12,6 +12,7 @@
 static inline char *new_strcpy(const char *const s) {
     char *const copy = (char *) malloc((strlen(s) + 1) * sizeof(char));
     strcpy(copy, s);
+//    printf("%s\n", s);
     return copy;
 }
 
@@ -24,14 +25,31 @@ struct song song_new(const char *const name, const char *const artist) {
 }
 
 bool song_equals(const struct song this, const struct song song) {
-    return strcmp(this.name, song.name) == 0 && strcmp(this.artist, song.artist) == 0;
+    return this.c->compare_to(this, song) == 0;
 }
 
+#define is_Alessia(s) ((s)[0] == 'A' && (s)[1] == 'l')
+
 int song_compare_to(const struct song this, const struct song song) {
+//    const bool is_Alessia = strcmp(song.artist, "Alessia Cara") == 0;
     const int cmp = strcmp(this.artist, song.artist);
+    if (is_Alessia(song.artist) || is_Alessia(this.artist)) {
+        printf("maybe\n");
+    }
+    for (int i = 0; i < strlen(this.artist); i++) {
+        printf("%d, ", this.artist[i]);
+    }
+    printf("\n[%s}\n", this.artist);
+    printf("[%s}\n", song.artist);
+    printf("%d\n\n", cmp);
+//    printf("[%s] vs [%s]: %d\n", this.artist, song.artist, cmp);
     if (cmp != 0) {
         return cmp;
     }
+    printf("\ncmp by name\n");
+    printf("[%s]\n", this.name);
+    printf("[%s]\n", song.name);
+    printf("%d\n\n", strcmp(this.name, song.name));
     return strcmp(this.name, song.name);
 }
 
