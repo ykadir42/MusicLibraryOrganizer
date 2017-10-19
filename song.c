@@ -71,7 +71,7 @@ char *song_to_string(const struct song this) {
 void song_print(const struct song this) {
 //    printf("printing song\n");
     char *const s = this.c->to_string(this);
-    printf(PRE_SONG_STRING);
+    printf("%s", PRE_SONG_STRING);
     printf("%s\n", s);
     free(s);
 //    printf("printed song\n");
