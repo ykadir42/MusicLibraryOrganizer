@@ -7,6 +7,8 @@
 
 #include <stdbool.h>
 
+extern const char *PRE_SONG_STRING;
+
 struct song_class {
     
     struct song (*const new)(const char *const name, const char *const artist);

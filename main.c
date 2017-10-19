@@ -10,9 +10,11 @@
 
 #include "song_library.h"
 
+#define DEBUG false
+
 #define p(s) printf(s"\n");
 
-void test_song_node() {
+void debug_song_node() {
     typedef struct song_node SongNode;
     typedef struct song Song;
     
@@ -31,9 +33,7 @@ void test_song_node() {
     node->c->free(node);
 }
 
-void test_library() {
-    srand((unsigned int) time(NULL));
-    
+void debug_library() {
     p("creating library")
     struct song_library *const library = SongLibraryClass.new();
     p("created library");
@@ -66,10 +66,42 @@ void test_library() {
     
 }
 
-int main() {
-    test_song_node();
+void test_song_node() {
+
+}
+
+void test_song_library() {
+    p("TESTING SONG LIBRARY\n");
+    p("====================\n");
     
-    test_library();
+    PRE_SONG_STRING = "\t\t";
+    
+    p("Testing song_library constructor");
+    struct song_library *const library = SongLibraryClass.new();
+    
+    p("Testing song_library.add_songs_from_csv(),");
+    p("\twhich tests song_library.add_song");
+    library->c->add_songs_from_csv(library, "songs.csv");
+    
+    p("Testing song_library.print(),");
+    p("\tshould print all songs in alphabetic order by artist, then song name");
+    library->c->print(library);
+    
+    p("Testing song_library.print(),");
+    p("\tshould print all songs in alphabetic order by artist, then song name");
+    library->c->print(library);
+}
+
+int main() {
+    srand((unsigned int) time(NULL));
+    
+    #if (DEBUG)
+    debug_song_node();
+    debug_library();
+    #endif
+    
+    test_song_node();
+    test_song_library();
     
     return EXIT_SUCCESS;
 }

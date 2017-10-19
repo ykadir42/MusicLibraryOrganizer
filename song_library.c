@@ -50,7 +50,7 @@ void song_library_add_song(struct song_library *const this, const struct song so
 // #include <sys/types.h> // done at top of file
 ssize_t getline(char **lineptr, size_t *n, FILE *stream); // NOLINT
 
-static inline _make_LF(char *const line, const size_t length) {
+static inline void _make_LF(char *const line, const size_t length) {
     // stupid carriage return mess up everything
     if (line[length - 1] == '\r') {
         // getline() or other functions will probably fail if no '\n' at all anyways
@@ -197,5 +197,3 @@ const struct song_library_class SongLibraryClass = {
         &song_library_remove_all_songs,
         &song_library_free,
 };
-#pragma clang diagnostic pop
-#pragma clang diagnostic pop
