@@ -28,17 +28,17 @@ struct song_node *song_library_songs_by_letter(const struct song_library *const 
 
 void song_library_add_song(struct song_library *const this, const struct song song) {
     const size_t i = (unsigned char) *song.artist;
-    printf("i: %zu\n", i);
+//    printf("i: %zu\n", i);
     struct song_node **const row_ptr = this->table + i;
     struct song_node *const row = *row_ptr;
     if (!row) {
-        printf("adding song to new linked list\n");
+//        printf("adding song to new linked list\n");
         *row_ptr = SongNodeClass.new(song, NULL);
     } else {
-        printf("adding song to existing linked list\n");
+//        printf("adding song to existing linked list\n");
         *row_ptr = row->c->insert_in_order(row, song); // insert and update head in table
-        printf("%p\n", (*row_ptr)->c);
-        (*row_ptr)->c->print(*row_ptr);
+//        printf("%p\n", (*row_ptr)->c);
+//        (*row_ptr)->c->print(*row_ptr);
     }
     this->lengths[i]++;
     this->num_songs++;
@@ -55,22 +55,21 @@ int song_library_add_songs_from_csv(struct song_library *const this, const char 
     if (!file) {
         return EXIT_FAILURE;
     }
-    char *buf = (char *) malloc(BUF_SIZE * sizeof(char));
-    const char delim = ',';
-    const char newline = '\n';
-    for (;;) {
-        size_t length;
-        if (getline(&buf, &length, file) < 0) {
-            goto error;
+    for (size_t length = 0;;) {
+        char *line = NULL;
+        if (getline(&line, &length, file) < 0) {
+            free(line);
+            break;
         }
-        const char *name = strtok(buf, &delim);
-        const char *artist = strtok(NULL, &newline);
-        printf("adding song: %s by %s\n", name, artist);
+//        printf("_____________________\n");
+//        printf("line: %s\n", line);
+        const char *name = strtok(line, ",");
+        const char *artist = strtok(NULL, "\n");
+//        printf("adding song: %s by %s\n", name, artist);
+//        printf("_____________________\n");
         this->c->add_song(this, SongClass.new(name, artist));
+        free(line);
     }
-    
-    error:
-    free(buf);
     fclose(file);
     return EXIT_SUCCESS;
 }

@@ -1,4 +1,4 @@
-CC = gcc -ggdb3 -std=c99  -O3
+CC = gcc -ggdb3 -std=c99 -Wall -Werror -O3
 
 song.o:
 	$(CC) -c song.c
@@ -15,8 +15,11 @@ main.o: song_library.o
 all: main.o song_library.o song_node.o song.o
 	$(CC) -o main main.o song_library.o song_node.o song.o
 
-run: all
+clean:
+	rm -f *.o
+
+run: clean all
 	./main
 
-clean:
-	rm *.o
+valgrind: clean all
+	valgrind -v ./main
