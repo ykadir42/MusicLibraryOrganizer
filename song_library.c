@@ -2,6 +2,8 @@
 // Created by kkyse on 10/16/2017.
 //
 
+#include <sys/types.h>
+
 #include "song_library.h"
 
 #include <stdlib.h>
@@ -45,15 +47,24 @@ void song_library_add_song(struct song_library *const this, const struct song so
 }
 
 // needed b/c header not on school computers for some reason
-#include <sys/types.h>
+// #include <sys/types.h> // done at top of file
 ssize_t getline(char **lineptr, size_t *n, FILE *stream); // NOLINT
 
-#define BUF_SIZE 1024
+static inline _make_LF(char *const line, const size_t length) {
+    // stupid carriage return mess up everything
+    if (line[length - 1] == '\r') {
+        // getline() or other functions will probably fail if no '\n' at all anyways
+        line[length - 1] = '\n'; // fix CR on old OS X
+    }
+    if (line[length - 2] == '\r') {
+        line[length - 2] = 0; // fix CRLF on Windows
+    }
+}
 
 int song_library_add_songs_from_csv(struct song_library *const this, const char *const filename) {
     FILE *const file = fopen(filename, "r");
     if (!file) {
-        return EXIT_FAILURE;
+        return -1;
     }
     for (size_t length = 0;;) {
         char *line = NULL;
@@ -61,10 +72,11 @@ int song_library_add_songs_from_csv(struct song_library *const this, const char 
             free(line);
             break;
         }
-//        printf("_____________________\n");
-//        printf("line: %s\n", line);
+        _make_LF(line, length);
         const char *name = strtok(line, ",");
         const char *artist = strtok(NULL, "\n");
+//        printf("_____________________\n");
+//        printf("line: %s\n", line);
 //        printf("adding song: %s by %s\n", name, artist);
 //        printf("_____________________\n");
         this->c->add_song(this, SongClass.new(name, artist));
@@ -185,3 +197,5 @@ const struct song_library_class SongLibraryClass = {
         &song_library_remove_all_songs,
         &song_library_free,
 };
+#pragma clang diagnostic pop
+#pragma clang diagnostic pop
