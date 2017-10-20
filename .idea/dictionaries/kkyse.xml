@@ -3,6 +3,7 @@
     <words>
       <w>getline</w>
       <w>lineptr</w>
+      <w>valgrind</w>
     </words>
   </dictionary>
 </component>

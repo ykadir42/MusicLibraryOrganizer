@@ -25,4 +25,4 @@ rerun: all
 	./main
 
 valgrind: clean all
-	valgrind -v ./main
+	valgrind -v --leak-check=full ./main

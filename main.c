@@ -18,9 +18,6 @@
 #define pn() p("")
 
 void debug_SongNode() {
-    typedef struct song_node SongNode;
-    typedef struct song Song;
-    
     Song song1 = SongClass.new("Name", "Artists");
     Song song2 = SongClass.new("Hello", "World");
     //Song song3 = SongClass.new("Song", "Bob");
@@ -38,11 +35,11 @@ void debug_SongNode() {
 
 void debug_SongLibrary() {
     p("creating library");
-    struct song_library *const library = SongLibraryClass.new();
+    SongLibrary *const library = SongLibraryClass.new();
     p("created library");
     
     p("creating song1");
-    const struct song song1 = SongClass.new("Title", "Artist");
+    Song song1 = SongClass.new("Title", "Artist");
     p("created song1");
     
     p("printing song1");
@@ -62,7 +59,7 @@ void debug_SongLibrary() {
     library->c->print(library);
     p("printed library");
     
-    const struct song_node *node = library->c->songs_by_artist_letter(library, 'A');
+    const SongNode *node = library->c->songs_by_artist_letter(library, 'A');
     node->c->print(node);
     
     library->c->free(library);
@@ -74,37 +71,38 @@ void test_SongNode() {
 }
 
 void test_SongLibrary() {
+    p("====================\n");
     p("TESTING SONG LIBRARY\n");
     p("====================\n");
     
     PRE_SONG_STRING = "\t\t";
     
-    p("Testing song_library constructor");
+    p("Testing SongLibrary constructor");
     SongLibrary *const library = SongLibraryClass.new();
     pn();
     
-    p("Testing song_library.add_songs_from_csv(),");
-    p("\twhich tests song_library.add_song");
+    p("Testing SongLibrary.add_songs_from_csv(),");
+    p("\twhich tests SongLibrary.add_song()");
     library->c->add_songs_from_csv(library, "songs.csv");
     pn();
     
-    p("Testing song_library.print(),");
+    p("Testing SongLibrary.print(),");
     p("\tshould print all songs in alphabetic order by artist, then song name");
     library->c->print(library);
     pn();
     
-    p("Testing song_library.print_by_letter('A'),");
+    p("Testing SongLibrary.print_by_letter('A'),");
     p("\tshould print all songs by 'A' in alphabetic order");
     library->c->print_by_letter(library, 'A');
     pn();
     
-    p("Testing song_library.print_by_artist(\"Alz\"),");
+    p("Testing SongLibrary.print_by_artist(\"Alz\"),");
     p("\tshould print all songs by \"Alz\" in alphabetic order");
     library->c->print_by_artist(library, "Alz");
     pn();
     
-    p("Testing song_library.find_song(),");
-    p("\twhich uses song_library.find_by_artist() and song_library.find_by_name()");
+    p("Testing SongLibrary.find_song(),");
+    p("\twhich uses SongLibrary.find_by_artist() and SongLibrary.find_by_name()");
     const Song song = SongClass.new("Cheap Thrills", "Sia");
     char *const song_str1 = song.c->to_string(song);
     printf("\tFinding song %s...\n", song_str1);
@@ -114,23 +112,18 @@ void test_SongLibrary() {
     free(song_str2);
     pn();
     
-    const uint32_t num_repeats = 0;
-    for (uint32_t i = 0; i < num_repeats; ++i) {
-        library->c->add_songs_from_csv(library, "songs.csv");
-    }
+    p("Testing duplicate songs by re-adding songs.csv");
+    library->c->add_songs_from_csv(library, "songs.csv");
+    library->c->print(library);
+    pn();
     
-    p("Testing song_library.shuffle_and_print() for 10 random songs");
+    p("Testing SongLibrary.shuffle_and_print() for 10 random songs");
     library->c->shuffle_and_print(library, 10);
     p("\tHopefully these are all random.");
     p("\tTesting for the correct random distribution would be much harder.");
     pn();
     
-    if (num_repeats > 0) {
-        library->c->print(library);
-    }
-    
-    
-    p("Testing song_library.remove_song()");
+    p("Testing SongLibrary.remove_song()");
     p("\tprinting library before removal...");
     library->c->print(library);
     library->c->remove_song(library, song);
@@ -144,8 +137,18 @@ void test_SongLibrary() {
     song.c->free(song);
     free(song_str1);
     
-    p("Testing song_library.free()");
+    p("Testing SongLibrary.remove_all()");
+    p("\tprinting library before removal...");
+    library->c->print(library);
+    library->c->remove_all_songs(library);
+    p("\tprinting library again to make sure it's empty");
+    library->c->print(library);
+    pn();
+    
+    p("Testing SongLibrary.free()");
+    library->c->add_songs_from_csv(library, "songs.csv");
     library->c->free(library);
+    p("\tvalgrind also found no memory leaks");
     pn();
 }
 

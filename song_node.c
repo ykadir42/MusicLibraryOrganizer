@@ -93,6 +93,7 @@ SongNode *SongNode_remove_song(SongNode *const this, const Song song, size_t *co
                 return this->c->remove_front(this);
             } else {
                 prev->next = cur->next;
+                cur->song.c->free(cur->song);
                 free(cur);
                 ++*num_removed;
                 if (!prev->next) {
