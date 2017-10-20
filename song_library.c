@@ -86,6 +86,15 @@ int SongLibrary_add_songs_from_csv(SongLibrary *const this, const char *const fi
     return EXIT_SUCCESS;
 }
 
+const SongNode *SongLibrary_find_by_artist(const SongLibrary *const this, const char *const artist) {
+    assert(artist);
+    const SongNode *const row = this->c->songs_by_artist_letter(this, *artist);
+    if (!row) {
+        return NULL;
+    }
+    return row->c->find_by_artist(row, artist);
+}
+
 const SongNode *SongLibrary_find_by_name(const SongLibrary *const this, const char *const name) {
     assert(name);
     for (size_t i = 0; i < arraysize(this->table); ++i) {
@@ -96,15 +105,6 @@ const SongNode *SongLibrary_find_by_name(const SongLibrary *const this, const ch
         }
     }
     return NULL;
-}
-
-const SongNode *SongLibrary_find_by_artist(const SongLibrary *const this, const char *const artist) {
-    assert(artist);
-    const SongNode *const row = this->c->songs_by_artist_letter(this, *artist);
-    if (!row) {
-        return NULL;
-    }
-    return row->c->find_by_artist(row, artist);
 }
 
 const SongNode *SongLibrary_find_song(const SongLibrary *const this, const Song song) {
@@ -160,14 +160,16 @@ void SongLibrary_shuffle_and_print(const SongLibrary *const this, const size_t n
 }
 
 void SongLibrary_remove_song(SongLibrary *const this, const Song song) {
-    for (size_t i = 0; i < arraysize(this->table); ++i) {
-        SongNode *const row = this->table[i];
-        if (row) {
-            this->table[i] = row->c->remove_song(row, song);
-            this->lengths[i]--;
-            this->num_songs--;
-        }
+    const size_t i = (unsigned char) *song.artist;
+    SongNode **const row_ptr = this->table + i;
+    SongNode *const row = *row_ptr;
+    if (!row) {
+        return; // song not in library
     }
+    size_t num_removed;
+    *row_ptr = row->c->remove_song(row, song, &num_removed);
+    this->lengths[i] -= num_removed;
+    this->num_songs -= num_removed;
 }
 
 void SongLibrary_remove_all_songs(SongLibrary *const this) {

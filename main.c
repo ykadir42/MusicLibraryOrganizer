@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <stdint.h>
 
 #include "song_library.h"
 
@@ -79,7 +80,7 @@ void test_SongLibrary() {
     PRE_SONG_STRING = "\t\t";
     
     p("Testing song_library constructor");
-    struct song_library *const library = SongLibraryClass.new();
+    SongLibrary *const library = SongLibraryClass.new();
     pn();
     
     p("Testing song_library.add_songs_from_csv(),");
@@ -102,9 +103,46 @@ void test_SongLibrary() {
     library->c->print_by_artist(library, "Alz");
     pn();
     
-    const struct song song = SongClass.new("Cheap Thrills", "Sia");
-    library->c->find_song(library, song);
+    p("Testing song_library.find_song(),");
+    p("\twhich uses song_library.find_by_artist() and song_library.find_by_name()");
+    const Song song = SongClass.new("Cheap Thrills", "Sia");
+    char *const song_str1 = song.c->to_string(song);
+    printf("\tFinding song %s...\n", song_str1);
+    const Song found_song = library->c->find_song(library, song)->song;
+    char *const song_str2 = found_song.c->to_string(found_song);
+    printf("\tFound song %s\n", song_str2);
+    free(song_str2);
+    pn();
+    
+    const uint32_t num_repeats = 0;
+    for (uint32_t i = 0; i < num_repeats; ++i) {
+        library->c->add_songs_from_csv(library, "songs.csv");
+    }
+    
+    p("Testing song_library.shuffle_and_print() for 10 random songs");
+    library->c->shuffle_and_print(library, 10);
+    p("\tHopefully these are all random.");
+    p("\tTesting for the correct random distribution would be much harder.");
+    pn();
+    
+    if (num_repeats > 0) {
+        library->c->print(library);
+    }
+    
+    
+    p("Testing song_library.remove_song()");
+    p("\tprinting library before removal...");
+    library->c->print(library);
+    library->c->remove_song(library, song);
+    printf("\tprinting library again to make sure %s was removed...\n", song_str1);
+    library->c->print(library);
+    p("\tIt might be hard to check if it was removed,");
+    printf("\tso now printing all songs by letter '%c' from %s...\n", *song.artist, song_str1);
+    library->c->print_by_letter(library, *song.artist);
+    pn();
+    
     song.c->free(song);
+    free(song_str1);
     
     p("Testing song_library.free()");
     library->c->free(library);

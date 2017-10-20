@@ -61,9 +61,9 @@ int Song_compare_to(const struct song this, const struct song song) {
 
 char *Song_to_string(const struct song this) {
 //    printf("to_stringing song\n");
-    const size_t new_length = strlen(this.name) + strlen(" by ") + strlen(this.artist) + 100;
+    const size_t new_length = strlen(this.name) + strlen("[ by ]") + strlen(this.artist) + 100;
     char *const s = (char *) malloc((new_length + 1) * sizeof(char));
-    sprintf(s, "%s by %s", this.name, this.artist);
+    sprintf(s, "[%s by %s]", this.name, this.artist);
 //    printf("to_stringed song\n");
     return s;
 }

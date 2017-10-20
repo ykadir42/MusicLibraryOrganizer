@@ -21,5 +21,8 @@ clean:
 run: clean all
 	./main
 
+rerun: all
+	./main
+
 valgrind: clean all
 	valgrind -v ./main

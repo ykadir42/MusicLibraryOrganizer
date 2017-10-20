@@ -25,43 +25,23 @@ SongNode *SongNode_insert_front(const SongNode *const this, const Song song) {
 }
 
 SongNode *SongNode_insert_in_order(const SongNode *const this, const Song song) {
-    #if (DEBUG)
-    const bool is_A = *song.artist == 'A';
-    if (is_A) {
-        printf("A: ");
-        song.c->print(song);
+    if (!this) {
+        return NULL; // unnecessary if called as method
     }
-    printf("inserting in order\n");
-        #define SongName(when) if (song.name[0] == 'S') printf("inserting "#when"\n")
-    #endif
-    for (SongNode *prev = NULL, *cur = (SongNode *) this; cur; prev = cur, cur = cur->next) {
+    SongNode *prev = NULL;
+    for (SongNode *cur = (SongNode *) this; cur; prev = cur, cur = cur->next) {
         if (song.c->compare_to(song, cur->song) < 0) {
             if (!prev) {
-                #if (DEBUG)
-                SongName(front);
-                #endif
                 return this->c->insert_front(this, song);
             } else {
-                if (prev->next) {
-                    #if (DEBUG)
-                    SongName(middle);
-                    #endif
-                    prev->next = cur->c->insert_front(cur, song);
-                } else {
-                    #if (DEBUG)
-                    SongName(end);
-                    #endif
-                    cur->next = SongNodeClass.new(song, NULL);
-                }
+                prev->next = cur->c->insert_front(cur, song);
                 return (SongNode *) this;
             }
         }
-        if (!cur->next) { // at end
-            cur->next = SongNodeClass.new(song, NULL);
-            return (SongNode *) this;
-        }
     }
-    return NULL; // UNREACHABLE
+    // insert at end
+    prev->next = SongNodeClass.new(song, NULL);
+    return (SongNode *) this;
 }
 
 void SongNode_print(const SongNode *this) {
@@ -105,19 +85,27 @@ SongNode *SongNode_remove_front(SongNode *this) {
     return next;
 }
 
-SongNode *SongNode_remove_song(SongNode *const this, const Song song) {
-    for (SongNode *cur = this, *prev = NULL; cur; prev = cur, cur = cur->next) {
-        if (cur->song.c->equals(cur->song, song)) {
-            if (cur == this) {
+SongNode *SongNode_remove_song(SongNode *const this, const Song song, size_t *const num_removed) {
+    *num_removed = 0;
+    for (SongNode *prev = NULL, *cur = this; cur;) {
+        if (song.c->equals(song, cur->song)) {
+            if (!prev) {
                 return this->c->remove_front(this);
             } else {
                 prev->next = cur->next;
                 free(cur);
-                return this;
+                ++*num_removed;
+                if (!prev->next) {
+                    return this;
+                }
+                cur = prev->next;
             }
+        } else {
+            prev = cur;
+            cur = cur->next;
         }
     }
-    return NULL; // UNREACHABLE
+    return this;
 }
 
 SongNode *SongNode_free(SongNode *this) {
