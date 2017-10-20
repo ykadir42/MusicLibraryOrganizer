@@ -16,7 +16,7 @@
 
 #define pn() p("")
 
-void debug_song_node() {
+void debug_SongNode() {
     typedef struct song_node SongNode;
     typedef struct song Song;
     
@@ -35,7 +35,7 @@ void debug_song_node() {
     node->c->free(node);
 }
 
-void debug_library() {
+void debug_SongLibrary() {
     p("creating library");
     struct song_library *const library = SongLibraryClass.new();
     p("created library");
@@ -68,11 +68,11 @@ void debug_library() {
     
 }
 
-void test_song_node() {
+void test_SongNode() {
 
 }
 
-void test_song_library() {
+void test_SongLibrary() {
     p("TESTING SONG LIBRARY\n");
     p("====================\n");
     
@@ -102,7 +102,9 @@ void test_song_library() {
     library->c->print_by_artist(library, "Alz");
     pn();
     
-    library->c.fi
+    const struct song song = SongClass.new("Cheap Thrills", "Sia");
+    library->c->find_song(library, song);
+    song.c->free(song);
     
     p("Testing song_library.free()");
     library->c->free(library);
@@ -117,8 +119,8 @@ int main() {
     debug_library();
     #endif
     
-    test_song_node();
-    test_song_library();
+    test_SongNode();
+    test_SongLibrary();
     
     return EXIT_SUCCESS;
 }

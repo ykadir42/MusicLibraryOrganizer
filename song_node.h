@@ -9,41 +9,41 @@
 
 #include "song.h"
 
-struct song_node_class {
-    
-    struct song_node *(*const new)(const struct song song, const struct song_node *const next);
-    
-    size_t (*const length)(const struct song_node *this);
-    
-    struct song_node *(*const insert_front)(const struct song_node *const this, const struct song song);
-    
-    struct song_node *(*const insert_in_order)(const struct song_node *this, const struct song song);
-    
-    void (*const print)(const struct song_node *this);
-    
-    const struct song_node *(*const find_by_name)(const struct song_node *this, const char *const name);
-    
-    const struct song_node *(*const find_by_artist)(const struct song_node *this, const char *const artist);
-    
-    const struct song_node *(*const get)(const struct song_node *this, const size_t index);
-    
-    const struct song_node *(*const get_random_with_length)(const struct song_node *this, const size_t length);
-    
-    const struct song_node *(*const get_random)(const struct song_node *this);
-    
-    struct song_node *(*const remove_front)(struct song_node *this);
-    
-    struct song_node *(*const remove_song)(struct song_node *const this, const struct song);
-    
-    struct song_node *(*const free)(struct song_node *this);
-    
-};
-
-struct song_node {
+typedef struct song_node {
     
     const struct song_node_class *const c;
-    struct song song;
+    Song song;
     struct song_node *next;
+    
+} SongNode;
+
+struct song_node_class {
+    
+    SongNode *(*const new)(const Song song, const SongNode *const next);
+    
+    size_t (*const length)(const SongNode *this);
+    
+    SongNode *(*const insert_front)(const SongNode *const this, const Song song);
+    
+    SongNode *(*const insert_in_order)(const SongNode *this, const Song song);
+    
+    void (*const print)(const SongNode *this);
+    
+    const SongNode *(*const find_by_name)(const SongNode *this, const char *const name);
+    
+    const SongNode *(*const find_by_artist)(const SongNode *this, const char *const artist);
+    
+    const SongNode *(*const get)(const SongNode *this, const size_t index);
+    
+    const SongNode *(*const get_random_with_length)(const SongNode *this, const size_t length);
+    
+    const SongNode *(*const get_random)(const SongNode *this);
+    
+    SongNode *(*const remove_front)(SongNode *this);
+    
+    SongNode *(*const remove_song)(SongNode *const this, const struct song);
+    
+    SongNode *(*const free)(SongNode *this);
     
 };
 

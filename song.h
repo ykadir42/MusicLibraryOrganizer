@@ -9,28 +9,28 @@
 
 extern const char *PRE_SONG_STRING;
 
-struct song_class {
-    
-    struct song (*const new)(const char *const name, const char *const artist);
-    
-    bool (*const equals)(const struct song this, const struct song song);
-    
-    int (*const compare_to)(const struct song this, const struct song song);
-    
-    char *(*const to_string)(const struct song this);
-    
-    void (*const print)(const struct song this);
-    
-    void (*const free)(const struct song this);
-    
-};
-
 struct song {
     
     const struct song_class *const c;
     
     const char *const name;
     const char *const artist;
+    
+} typedef Song;
+
+struct song_class {
+    
+    Song (*const new)(const char *const name, const char *const artist);
+    
+    bool (*const equals)(const Song this, const Song song);
+    
+    int (*const compare_to)(const Song this, const Song song);
+    
+    char *(*const to_string)(const Song this);
+    
+    void (*const print)(const Song this);
+    
+    void (*const free)(const Song this);
     
 };
 

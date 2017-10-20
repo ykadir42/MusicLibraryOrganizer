@@ -18,7 +18,7 @@ static inline char *new_strcpy(const char *const s) {
     return copy;
 }
 
-struct song song_new(const char *const name, const char *const artist) {
+struct song Song_new(const char *const name, const char *const artist) {
     assert(name);
     assert(artist);
     assert(*name);
@@ -26,13 +26,13 @@ struct song song_new(const char *const name, const char *const artist) {
     return (struct song) {.c = &SongClass, .name = new_strcpy(name), .artist = new_strcpy(artist)};
 }
 
-bool song_equals(const struct song this, const struct song song) {
+bool Song_equals(const struct song this, const struct song song) {
     return this.c->compare_to(this, song) == 0;
 }
 
 #define is_Alessia(s) ((s)[0] == 'A' && (s)[1] == 'l')
 
-int song_compare_to(const struct song this, const struct song song) {
+int Song_compare_to(const struct song this, const struct song song) {
     const int cmp = strcmp(this.artist, song.artist);
     #if (DEBUG)
     //    const bool is_Alessia = strcmp(song.artist, "Alessia Cara") == 0;
@@ -59,7 +59,7 @@ int song_compare_to(const struct song this, const struct song song) {
     return strcmp(this.name, song.name);
 }
 
-char *song_to_string(const struct song this) {
+char *Song_to_string(const struct song this) {
 //    printf("to_stringing song\n");
     const size_t new_length = strlen(this.name) + strlen(" by ") + strlen(this.artist) + 100;
     char *const s = (char *) malloc((new_length + 1) * sizeof(char));
@@ -68,7 +68,7 @@ char *song_to_string(const struct song this) {
     return s;
 }
 
-void song_print(const struct song this) {
+void Song_print(const struct song this) {
 //    printf("printing song\n");
     char *const s = this.c->to_string(this);
     printf("%s", PRE_SONG_STRING);
@@ -77,16 +77,16 @@ void song_print(const struct song this) {
 //    printf("printed song\n");
 }
 
-void song_free(const struct song this) {
+void Song_free(const struct song this) {
     free((char *) this.artist);
     free((char *) this.name);
 }
 
 const struct song_class SongClass = {
-        &song_new,
-        &song_equals,
-        &song_compare_to,
-        &song_to_string,
-        &song_print,
-        &song_free,
+        &Song_new,
+        &Song_equals,
+        &Song_compare_to,
+        &Song_to_string,
+        &Song_print,
+        &Song_free,
 };
