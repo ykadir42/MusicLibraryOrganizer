@@ -24,7 +24,7 @@ void debug_SongNode() {
     
     p("inserting in order");
     
-    SongNode *node = SongNodeClass.new(song1, NULL);
+    SongNode *node = SongNodeClass.new_sentinel(song1);
     node = node->c->insert_in_order(node, song2);
     printf("%p\n", node);
     //node = node->c->insert_in_order(node, song3);
@@ -63,16 +63,30 @@ void debug_SongLibrary() {
     node->c->print(node);
     
     library->c->free(library);
-    
 }
 
 void test_SongNode() {
-
+    p("====================");
+    p("TESTING SONG NODE");
+    p("====================\n");
+    
+    PRE_SONG_STRING = "\t\t";
+    
+    // tests
+    const Song song1 = SongClass.new("SongName", "Artist");
+    
+    SongNode *songs = SongNodeClass.new_sentinel(song1);
+    
+    songs->c->free(songs);
+    
+    p("====================");
+    p("SONG NODE PASSED ALL TESTS");
+    p("====================\n");
 }
 
 void test_SongLibrary() {
-    p("====================\n");
-    p("TESTING SONG LIBRARY\n");
+    p("====================");
+    p("TESTING SONG LIBRARY");
     p("====================\n");
     
     PRE_SONG_STRING = "\t\t";
@@ -83,7 +97,7 @@ void test_SongLibrary() {
     
     p("Testing SongLibrary.add_songs_from_csv(),");
     p("\twhich tests SongLibrary.add_song()");
-    library->c->add_songs_from_csv(library, "songs.csv");
+    library->c->add_songs_from_default_csv(library);
     pn();
     
     p("Testing SongLibrary.print(),");
@@ -112,8 +126,8 @@ void test_SongLibrary() {
     free(song_str2);
     pn();
     
-    p("Testing duplicate songs by re-adding songs.csv");
-    library->c->add_songs_from_csv(library, "songs.csv");
+    printf("Testing duplicate songs by re-adding %s\n", DEFAULT_SONGS_CSV);
+    library->c->add_songs_from_default_csv(library);
     library->c->print(library);
     pn();
     
@@ -146,10 +160,14 @@ void test_SongLibrary() {
     pn();
     
     p("Testing SongLibrary.free()");
-    library->c->add_songs_from_csv(library, "songs.csv");
+    library->c->add_songs_from_default_csv(library);
     library->c->free(library);
     p("\tvalgrind also found no memory leaks");
     pn();
+    
+    p("====================");
+    p("SONG LIBRARY PASSED ALL TESTS");
+    p("====================\n");
 }
 
 int main() {

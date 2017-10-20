@@ -9,6 +9,8 @@
 
 #define SONG_TABLE_LENGTH 1 << (8 * sizeof(char))
 
+extern const char *DEFAULT_SONGS_CSV;
+
 typedef struct song_library {
     
     const struct song_library_class *const c;
@@ -27,6 +29,8 @@ struct song_library_class {
     void (*const add_song)(SongLibrary *const this, const Song song);
     
     int (*const add_songs_from_csv)(SongLibrary *const this, const char *const filename);
+    
+    int (*const add_songs_from_default_csv)(SongLibrary *const this);
     
     const SongNode *(*const find_by_artist)(const SongLibrary *const this, const char *const artist);
     

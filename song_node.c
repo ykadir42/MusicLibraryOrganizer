@@ -14,6 +14,10 @@ SongNode *SongNode_new(const Song song, const SongNode *const next) {
     return dynamic;
 }
 
+SongNode *SongNode_new_sentinel(const Song song) {
+    return SongNodeClass.new(song, NULL);
+}
+
 size_t SongNode_length(const SongNode *this) {
     size_t i = 0;
     for (; this; ++i, this = this->next);
@@ -40,7 +44,7 @@ SongNode *SongNode_insert_in_order(const SongNode *const this, const Song song) 
         }
     }
     // insert at end
-    prev->next = SongNodeClass.new(song, NULL);
+    prev->next = SongNodeClass.new_sentinel(song);
     return (SongNode *) this;
 }
 
@@ -123,6 +127,7 @@ SongNode *SongNode_free(SongNode *this) {
 
 const struct song_node_class SongNodeClass = {
         &SongNode_new,
+        &SongNode_new_sentinel,
         &SongNode_length,
         &SongNode_insert_front,
         &SongNode_insert_in_order,

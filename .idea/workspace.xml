@@ -12,12 +12,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="853e8db9-bbb7-48e5-ba2e-729b9b4bb3a9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/kkyse.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/kkyse.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.c" afterPath="$PROJECT_DIR$/main.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/song.c" afterPath="$PROJECT_DIR$/song.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/song_library.c" afterPath="$PROJECT_DIR$/song_library.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/song_library.h" afterPath="$PROJECT_DIR$/song_library.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/song_node.c" afterPath="$PROJECT_DIR$/song_node.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/song_node.h" afterPath="$PROJECT_DIR$/song_node.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,45 +29,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="Makefile" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Makefile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1080">
-              <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.c" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.c" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="678">
-              <caret line="134" column="9" lean-forward="true" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
+            <state relative-caret-position="994">
+              <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
               <folding>
                 <element signature="e#42#59#0" expanded="true" />
-                <element signature="e#4569#4608#0" expanded="true" />
+                <element signature="e#691#1544#0" expanded="false" />
+                <element signature="e#5080#5119#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="song_node.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="song_node.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/song_node.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="88" column="21" lean-forward="true" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
+            <state relative-caret-position="474">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
                 <element signature="e#42#64#0" expanded="true" />
                 <element signature="e#107#404#0" expanded="false" />
-                <element signature="e#406#528#0" expanded="false" />
-                <element signature="e#530#652#0" expanded="false" />
-                <element signature="e#1317#1748#0" expanded="false" />
-                <element signature="e#1801#1959#0" expanded="false" />
-                <element signature="e#1961#2103#0" expanded="false" />
-                <element signature="e#2105#2239#0" expanded="false" />
-                <element signature="e#2241#2364#0" expanded="false" />
-                <element signature="e#3070#3314#0" expanded="false" />
+                <element signature="e#502#624#0" expanded="false" />
+                <element signature="e#626#748#0" expanded="false" />
+                <element signature="e#1416#1847#0" expanded="false" />
+                <element signature="e#1900#2058#0" expanded="false" />
+                <element signature="e#2060#2202#0" expanded="false" />
+                <element signature="e#2204#2338#0" expanded="false" />
+                <element signature="e#2340#2463#0" expanded="false" />
+                <element signature="e#3169#3413#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -76,8 +67,8 @@
       <file leaf-file-name="song_node.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/song_node.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="754">
-              <caret line="41" column="52" lean-forward="true" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
+            <state relative-caret-position="314">
+              <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -86,12 +77,12 @@
       <file leaf-file-name="song.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/song.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="720">
-              <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
+            <state relative-caret-position="200">
+              <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
                 <element signature="e#42#59#0" expanded="true" />
-                <element signature="e#977#1447#0" expanded="true" />
-                <element signature="e#1525#1669#0" expanded="true" />
+                <element signature="e#940#1410#0" expanded="true" />
+                <element signature="e#1488#1632#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,17 +92,7 @@
         <entry file="file://$PROJECT_DIR$/song.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="434">
-              <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="song_library.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/song_library.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+              <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -120,25 +101,16 @@
       <file leaf-file-name="song_library.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/song_library.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="674">
-              <caret line="172" column="1" lean-forward="true" selection-start-line="172" selection-start-column="1" selection-end-line="172" selection-end-column="1" />
+            <state relative-caret-position="1034">
+              <caret line="208" column="27" lean-forward="true" selection-start-line="208" selection-start-column="27" selection-end-line="208" selection-end-column="27" />
               <folding>
                 <element signature="e#42#64#0" expanded="true" />
-                <element signature="e#3663#3877#0" expanded="false" />
-                <element signature="e#3879#4299#0" expanded="false" />
-                <element signature="e#4301#4715#0" expanded="false" />
-                <element signature="e#4717#5309#0" expanded="false" />
+                <element signature="e#2004#2788#0" expanded="false" />
+                <element signature="e#3850#4064#0" expanded="false" />
+                <element signature="e#4066#4486#0" expanded="false" />
+                <element signature="e#4488#4902#0" expanded="false" />
+                <element signature="e#4904#5496#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -148,6 +120,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1040">
               <caret line="26" column="17" lean-forward="false" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="song_library.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/song_library.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="440">
+              <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -185,15 +167,15 @@
       <list>
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/main.h" />
-        <option value="$PROJECT_DIR$/song_library.h" />
         <option value="$PROJECT_DIR$/song.h" />
-        <option value="$PROJECT_DIR$/song_node.h" />
-        <option value="$PROJECT_DIR$/song_library.c" />
         <option value="$PROJECT_DIR$/songs.csv" />
         <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/song.c" />
-        <option value="$PROJECT_DIR$/main.c" />
+        <option value="$PROJECT_DIR$/song_node.h" />
         <option value="$PROJECT_DIR$/song_node.c" />
+        <option value="$PROJECT_DIR$/song_library.h" />
+        <option value="$PROJECT_DIR$/song_library.c" />
+        <option value="$PROJECT_DIR$/main.c" />
       </list>
     </option>
   </component>
@@ -203,6 +185,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1541" />
     <option name="y" value="4" />
@@ -319,12 +302,12 @@
       <workItem from="1508369502251" duration="5437000" />
       <workItem from="1508375097120" duration="5647000" />
       <workItem from="1508381350061" duration="1453000" />
-      <workItem from="1508439174572" duration="12524000" />
+      <workItem from="1508439174572" duration="15431000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27292000" />
+    <option name="totallyTimeSpent" value="30199000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-16" y="-16" width="3232" height="1732" extended-state="6" />
@@ -340,6 +323,7 @@
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1803125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="LuaJ" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952252" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.399462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -350,7 +334,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32952252" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -389,7 +372,8 @@
           <caret line="74" column="1" lean-forward="false" selection-start-line="74" selection-start-column="1" selection-end-line="74" selection-end-column="1" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#4569#4608#0" expanded="true" />
+            <element signature="e#691#1544#0" expanded="false" />
+            <element signature="e#5080#5119#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -401,14 +385,14 @@
           <folding>
             <element signature="e#42#64#0" expanded="true" />
             <element signature="e#107#404#0" expanded="false" />
-            <element signature="e#406#528#0" expanded="false" />
-            <element signature="e#530#652#0" expanded="false" />
-            <element signature="e#1317#1748#0" expanded="false" />
-            <element signature="e#1801#1959#0" expanded="false" />
-            <element signature="e#1961#2103#0" expanded="false" />
-            <element signature="e#2105#2239#0" expanded="false" />
-            <element signature="e#2241#2364#0" expanded="false" />
-            <element signature="e#3070#3314#0" expanded="false" />
+            <element signature="e#502#624#0" expanded="false" />
+            <element signature="e#626#748#0" expanded="false" />
+            <element signature="e#1416#1847#0" expanded="false" />
+            <element signature="e#1900#2058#0" expanded="false" />
+            <element signature="e#2060#2202#0" expanded="false" />
+            <element signature="e#2204#2338#0" expanded="false" />
+            <element signature="e#2340#2463#0" expanded="false" />
+            <element signature="e#3169#3413#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -419,8 +403,8 @@
           <caret line="53" column="1" lean-forward="false" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#977#1447#0" expanded="true" />
-            <element signature="e#1525#1669#0" expanded="true" />
+            <element signature="e#940#1410#0" expanded="true" />
+            <element signature="e#1488#1632#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -455,10 +439,11 @@
           <caret line="61" column="1" lean-forward="true" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
           <folding>
             <element signature="e#42#64#0" expanded="true" />
-            <element signature="e#3663#3877#0" expanded="false" />
-            <element signature="e#3879#4299#0" expanded="false" />
-            <element signature="e#4301#4715#0" expanded="false" />
-            <element signature="e#4717#5309#0" expanded="false" />
+            <element signature="e#2004#2788#0" expanded="false" />
+            <element signature="e#3850#4064#0" expanded="false" />
+            <element signature="e#4066#4486#0" expanded="false" />
+            <element signature="e#4488#4902#0" expanded="false" />
+            <element signature="e#4904#5496#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -493,7 +478,8 @@
           <caret line="57" column="26" lean-forward="false" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#4569#4608#0" expanded="true" />
+            <element signature="e#691#1544#0" expanded="false" />
+            <element signature="e#5080#5119#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -505,14 +491,14 @@
           <folding>
             <element signature="e#42#64#0" expanded="true" />
             <element signature="e#107#404#0" expanded="false" />
-            <element signature="e#406#528#0" expanded="false" />
-            <element signature="e#530#652#0" expanded="false" />
-            <element signature="e#1317#1748#0" expanded="false" />
-            <element signature="e#1801#1959#0" expanded="false" />
-            <element signature="e#1961#2103#0" expanded="false" />
-            <element signature="e#2105#2239#0" expanded="false" />
-            <element signature="e#2241#2364#0" expanded="false" />
-            <element signature="e#3070#3314#0" expanded="false" />
+            <element signature="e#502#624#0" expanded="false" />
+            <element signature="e#626#748#0" expanded="false" />
+            <element signature="e#1416#1847#0" expanded="false" />
+            <element signature="e#1900#2058#0" expanded="false" />
+            <element signature="e#2060#2202#0" expanded="false" />
+            <element signature="e#2204#2338#0" expanded="false" />
+            <element signature="e#2340#2463#0" expanded="false" />
+            <element signature="e#3169#3413#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -523,10 +509,11 @@
           <caret line="11" column="25" lean-forward="false" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
             <element signature="e#42#64#0" expanded="true" />
-            <element signature="e#3663#3877#0" expanded="false" />
-            <element signature="e#3879#4299#0" expanded="false" />
-            <element signature="e#4301#4715#0" expanded="false" />
-            <element signature="e#4717#5309#0" expanded="false" />
+            <element signature="e#2004#2788#0" expanded="false" />
+            <element signature="e#3850#4064#0" expanded="false" />
+            <element signature="e#4066#4486#0" expanded="false" />
+            <element signature="e#4488#4902#0" expanded="false" />
+            <element signature="e#4904#5496#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -553,8 +540,8 @@
           <caret line="53" column="1" lean-forward="false" selection-start-line="53" selection-start-column="1" selection-end-line="53" selection-end-column="1" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#977#1447#0" expanded="true" />
-            <element signature="e#1525#1669#0" expanded="true" />
+            <element signature="e#940#1410#0" expanded="true" />
+            <element signature="e#1488#1632#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -589,7 +576,8 @@
           <caret line="21" column="4" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#4569#4608#0" expanded="true" />
+            <element signature="e#691#1544#0" expanded="false" />
+            <element signature="e#5080#5119#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -601,14 +589,14 @@
           <folding>
             <element signature="e#42#64#0" expanded="true" />
             <element signature="e#107#404#0" expanded="false" />
-            <element signature="e#406#528#0" expanded="false" />
-            <element signature="e#530#652#0" expanded="false" />
-            <element signature="e#1317#1748#0" expanded="false" />
-            <element signature="e#1801#1959#0" expanded="false" />
-            <element signature="e#1961#2103#0" expanded="false" />
-            <element signature="e#2105#2239#0" expanded="false" />
-            <element signature="e#2241#2364#0" expanded="false" />
-            <element signature="e#3070#3314#0" expanded="false" />
+            <element signature="e#502#624#0" expanded="false" />
+            <element signature="e#626#748#0" expanded="false" />
+            <element signature="e#1416#1847#0" expanded="false" />
+            <element signature="e#1900#2058#0" expanded="false" />
+            <element signature="e#2060#2202#0" expanded="false" />
+            <element signature="e#2204#2338#0" expanded="false" />
+            <element signature="e#2340#2463#0" expanded="false" />
+            <element signature="e#3169#3413#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -619,10 +607,11 @@
           <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
           <folding>
             <element signature="e#42#64#0" expanded="true" />
-            <element signature="e#3663#3877#0" expanded="false" />
-            <element signature="e#3879#4299#0" expanded="false" />
-            <element signature="e#4301#4715#0" expanded="false" />
-            <element signature="e#4717#5309#0" expanded="false" />
+            <element signature="e#2004#2788#0" expanded="false" />
+            <element signature="e#3850#4064#0" expanded="false" />
+            <element signature="e#4066#4486#0" expanded="false" />
+            <element signature="e#4488#4902#0" expanded="false" />
+            <element signature="e#4904#5496#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -657,7 +646,8 @@
           <caret line="60" column="57" lean-forward="false" selection-start-line="60" selection-start-column="57" selection-end-line="60" selection-end-column="57" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#4569#4608#0" expanded="true" />
+            <element signature="e#691#1544#0" expanded="false" />
+            <element signature="e#5080#5119#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -669,14 +659,14 @@
           <folding>
             <element signature="e#42#64#0" expanded="true" />
             <element signature="e#107#404#0" expanded="false" />
-            <element signature="e#406#528#0" expanded="false" />
-            <element signature="e#530#652#0" expanded="false" />
-            <element signature="e#1317#1748#0" expanded="false" />
-            <element signature="e#1801#1959#0" expanded="false" />
-            <element signature="e#1961#2103#0" expanded="false" />
-            <element signature="e#2105#2239#0" expanded="false" />
-            <element signature="e#2241#2364#0" expanded="false" />
-            <element signature="e#3070#3314#0" expanded="false" />
+            <element signature="e#502#624#0" expanded="false" />
+            <element signature="e#626#748#0" expanded="false" />
+            <element signature="e#1416#1847#0" expanded="false" />
+            <element signature="e#1900#2058#0" expanded="false" />
+            <element signature="e#2060#2202#0" expanded="false" />
+            <element signature="e#2204#2338#0" expanded="false" />
+            <element signature="e#2340#2463#0" expanded="false" />
+            <element signature="e#3169#3413#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -687,10 +677,11 @@
           <caret line="46" column="2" lean-forward="false" selection-start-line="46" selection-start-column="2" selection-end-line="46" selection-end-column="2" />
           <folding>
             <element signature="e#42#64#0" expanded="true" />
-            <element signature="e#3663#3877#0" expanded="false" />
-            <element signature="e#3879#4299#0" expanded="false" />
-            <element signature="e#4301#4715#0" expanded="false" />
-            <element signature="e#4717#5309#0" expanded="false" />
+            <element signature="e#2004#2788#0" expanded="false" />
+            <element signature="e#3850#4064#0" expanded="false" />
+            <element signature="e#4066#4486#0" expanded="false" />
+            <element signature="e#4488#4902#0" expanded="false" />
+            <element signature="e#4904#5496#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -765,14 +756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/song_node.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="41" column="52" lean-forward="true" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/songs.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1040">
@@ -789,74 +772,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/song_library.h">
+    <entry file="file://$PROJECT_DIR$/song.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="28" column="16" lean-forward="false" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        <state relative-caret-position="200">
+          <caret line="14" column="0" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#59#0" expanded="true" />
+            <element signature="e#940#1410#0" expanded="true" />
+            <element signature="e#1488#1632#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/song_node.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/song_node.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#42#64#0" expanded="true" />
+            <element signature="e#107#404#0" expanded="false" />
+            <element signature="e#502#624#0" expanded="false" />
+            <element signature="e#626#748#0" expanded="false" />
+            <element signature="e#1416#1847#0" expanded="false" />
+            <element signature="e#1900#2058#0" expanded="false" />
+            <element signature="e#2060#2202#0" expanded="false" />
+            <element signature="e#2204#2338#0" expanded="false" />
+            <element signature="e#2340#2463#0" expanded="false" />
+            <element signature="e#3169#3413#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/song.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="434">
-          <caret line="20" column="19" lean-forward="true" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
+          <caret line="20" column="19" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/song.c">
+    <entry file="file://$PROJECT_DIR$/song_library.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="27" column="1" lean-forward="true" selection-start-line="27" selection-start-column="1" selection-end-line="27" selection-end-column="1" />
-          <folding>
-            <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#977#1447#0" expanded="true" />
-            <element signature="e#1525#1669#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="440">
+          <caret line="11" column="37" lean-forward="false" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/song_library.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="172" column="1" lean-forward="true" selection-start-line="172" selection-start-column="1" selection-end-line="172" selection-end-column="1" />
+        <state relative-caret-position="1034">
+          <caret line="208" column="27" lean-forward="true" selection-start-line="208" selection-start-column="27" selection-end-line="208" selection-end-column="27" />
           <folding>
             <element signature="e#42#64#0" expanded="true" />
-            <element signature="e#3663#3877#0" expanded="false" />
-            <element signature="e#3879#4299#0" expanded="false" />
-            <element signature="e#4301#4715#0" expanded="false" />
-            <element signature="e#4717#5309#0" expanded="false" />
+            <element signature="e#2004#2788#0" expanded="false" />
+            <element signature="e#3850#4064#0" expanded="false" />
+            <element signature="e#4066#4486#0" expanded="false" />
+            <element signature="e#4488#4902#0" expanded="false" />
+            <element signature="e#4904#5496#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="134" column="9" lean-forward="true" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
+        <state relative-caret-position="994">
+          <caret line="164" column="0" lean-forward="false" selection-start-line="164" selection-start-column="0" selection-end-line="164" selection-end-column="0" />
           <folding>
             <element signature="e#42#59#0" expanded="true" />
-            <element signature="e#4569#4608#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/song_node.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="88" column="21" lean-forward="true" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-          <folding>
-            <element signature="e#42#64#0" expanded="true" />
-            <element signature="e#107#404#0" expanded="false" />
-            <element signature="e#406#528#0" expanded="false" />
-            <element signature="e#530#652#0" expanded="false" />
-            <element signature="e#1317#1748#0" expanded="false" />
-            <element signature="e#1801#1959#0" expanded="false" />
-            <element signature="e#1961#2103#0" expanded="false" />
-            <element signature="e#2105#2239#0" expanded="false" />
-            <element signature="e#2241#2364#0" expanded="false" />
-            <element signature="e#3070#3314#0" expanded="false" />
+            <element signature="e#691#1544#0" expanded="false" />
+            <element signature="e#5080#5119#0" expanded="true" />
           </folding>
         </state>
       </provider>

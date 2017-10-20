@@ -21,6 +21,8 @@ struct song_node_class {
     
     SongNode *(*const new)(const Song song, const SongNode *const next);
     
+    SongNode *(*const new_sentinel)(const Song song);
+    
     size_t (*const length)(const SongNode *this);
     
     SongNode *(*const insert_front)(const SongNode *const this, const Song song);

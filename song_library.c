@@ -17,6 +17,8 @@
 
 #define arraysize(array) (sizeof(array) / sizeof(*(array)))
 
+const char *DEFAULT_SONGS_CSV = "songs.csv";
+
 SongLibrary *SongLibrary_new() {
     const SongLibrary local = {.c = &SongLibraryClass};
     SongLibrary *dynamic = (SongLibrary *) malloc(sizeof(struct song_library));
@@ -35,7 +37,7 @@ void SongLibrary_add_song(SongLibrary *const this, const Song song) {
     SongNode *const row = *row_ptr;
     if (!row) {
 //        printf("adding song to new linked list\n");
-        *row_ptr = SongNodeClass.new(song, NULL);
+        *row_ptr = SongNodeClass.new_sentinel(song);
     } else {
 //        printf("adding song to existing linked list\n");
         *row_ptr = row->c->insert_in_order(row, song); // insert and update head in table
@@ -84,6 +86,10 @@ int SongLibrary_add_songs_from_csv(SongLibrary *const this, const char *const fi
     }
     fclose(file);
     return EXIT_SUCCESS;
+}
+
+int SongLibrary_add_songs_from_default_csv(SongLibrary *const this) {
+    return this->c->add_songs_from_csv(this, DEFAULT_SONGS_CSV);
 }
 
 const SongNode *SongLibrary_find_by_artist(const SongLibrary *const this, const char *const artist) {
@@ -194,6 +200,7 @@ const struct song_library_class SongLibraryClass = {
         &SongLibrary_songs_by_artist_letter,
         &SongLibrary_add_song,
         &SongLibrary_add_songs_from_csv,
+        &SongLibrary_add_songs_from_default_csv,
         &SongLibrary_find_by_artist,
         &SongLibrary_find_by_name,
         &SongLibrary_find_song,

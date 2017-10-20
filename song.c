@@ -12,7 +12,6 @@
 const char *PRE_SONG_STRING = "";
 
 static inline char *new_strcpy(const char *const s) {
-    printf("[new_strcpy]: %s\n", s);
     char *const copy = (char *) malloc((strlen(s) + 1) * sizeof(char));
     strcpy(copy, s);
 //    printf("%s\n", s);
