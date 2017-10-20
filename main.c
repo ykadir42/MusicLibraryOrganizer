@@ -67,7 +67,7 @@ void debug_SongLibrary() {
 
 void test_SongNode() {
     p("====================");
-    p("TESTING SONG NODE");
+    p("TESTING SONG LINKED LIST");
     p("====================\n");
     
     PRE_SONG_STRING = "\t\t";
@@ -79,8 +79,14 @@ void test_SongNode() {
     
     songs->c->free(songs);
     
+    SongLibrary *const library = SongLibraryClass.new();
+    library->c->add_songs_from_default_csv(library);
+    const SongNode *const all_songs = library->c->all_songs(library);
+    
+    all_songs->c->free_nodes_only((SongNode *) all_songs);
+    
     p("====================");
-    p("SONG NODE PASSED ALL TESTS");
+    p("SONG LINKED LIST PASSED ALL TESTS");
     p("====================\n");
 }
 
@@ -183,3 +189,6 @@ int main() {
     
     return EXIT_SUCCESS;
 }
+
+#undef pn
+#undef p

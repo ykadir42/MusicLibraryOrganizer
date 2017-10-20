@@ -26,6 +26,16 @@ SongLibrary *SongLibrary_new() {
     return dynamic;
 }
 
+const SongNode *SongLibrary_all_songs(const SongLibrary *const this) {
+    const SongNode *all_songs = NULL;
+    for (size_t i = 0; i < arraysize(this->table); ++i) {
+        for (const SongNode *head = this->table[i]; head; head = head->next) {
+            all_songs = SongNodeClass.insert_front(all_songs, head->song);
+        }
+    }
+    return all_songs;
+}
+
 SongNode *SongLibrary_songs_by_artist_letter(const SongLibrary *const this, const char letter) {
     return this->table[(unsigned char) letter];
 }
@@ -197,6 +207,7 @@ void SongLibrary_free(SongLibrary *const this) {
 
 const struct song_library_class SongLibraryClass = {
         &SongLibrary_new,
+        &SongLibrary_all_songs,
         &SongLibrary_songs_by_artist_letter,
         &SongLibrary_add_song,
         &SongLibrary_add_songs_from_csv,

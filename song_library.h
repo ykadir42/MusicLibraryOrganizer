@@ -24,6 +24,8 @@ struct song_library_class {
     
     SongLibrary *(*const new)();
     
+    const SongNode *(*const all_songs)(const SongLibrary *const this);
+    
     SongNode *(*const songs_by_artist_letter)(const SongLibrary *const this, const char letter);
     
     void (*const add_song)(SongLibrary *const this, const Song song);

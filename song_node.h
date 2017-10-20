@@ -45,7 +45,11 @@ struct song_node_class {
     
     SongNode *(*const remove_song)(SongNode *const this, const struct song, size_t *const num_removed);
     
-    SongNode *(*const free)(SongNode *this);
+    SongNode *(*const free_nodes_maybe)(SongNode *this, const bool free_songs);
+    
+    SongNode *(*const free_nodes_only)(SongNode *const this);
+    
+    SongNode *(*const free)(SongNode *const this);
     
 };
 

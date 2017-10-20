@@ -113,16 +113,26 @@ SongNode *SongNode_remove_song(SongNode *const this, const Song song, size_t *co
     return this;
 }
 
-SongNode *SongNode_free(SongNode *this) {
+SongNode *SongNode_free_nodes_maybe(SongNode *this, const bool free_songs) {
     for (;;) {
         SongNode *const next = this->next;
-        this->song.c->free(this->song);
+        if (free_songs) {
+            this->song.c->free(this->song);
+        }
         free(this);
         if (!next) {
             return NULL;
         }
         this = next;
     }
+}
+
+SongNode *SongNode_free_nodes_only(SongNode *const this) {
+    return this->c->free_nodes_maybe(this, false);
+}
+
+SongNode *SongNode_free(SongNode *const this) {
+    return this->c->free_nodes_maybe(this, true);
 }
 
 const struct song_node_class SongNodeClass = {
@@ -139,5 +149,7 @@ const struct song_node_class SongNodeClass = {
         &SongNode_get_random,
         &SongNode_remove_front,
         &SongNode_remove_song,
+        &SongNode_free_nodes_maybe,
+        &SongNode_free_nodes_only,
         &SongNode_free,
 };
