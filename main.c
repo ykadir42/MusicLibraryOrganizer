@@ -296,7 +296,7 @@ int main() {
     #endif
     
     test_SongNode();
-    //test_SongLibrary();
+    test_SongLibrary();
     
     return EXIT_SUCCESS;
 }
