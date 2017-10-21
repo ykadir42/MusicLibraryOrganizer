@@ -77,7 +77,7 @@ void Song_free(const Song this) {
 #undef free_field
 
 #define free_other_songs_field(field) if (this.field != song.field) \
-    free((char *) this.field), *((char **) &this.field) = NULL
+    free((char *) song.field), *((char **) &song.field) = NULL
 
 void Song_free_other_song_safely(const Song this, const Song song) {
     free_other_songs_field(artist);

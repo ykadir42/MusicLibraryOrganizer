@@ -261,6 +261,7 @@ void test_SongLibrary() {
     printf("\tprinting library again to make sure %s was removed...\n", song_str1);
     library->c->print(library);
     p("\tIt might be hard to check if it was removed,");
+    song.c->print(song);
     printf("\tso now printing all songs by letter '%c' from %s...\n", *song.artist, song_str1);
     library->c->print_by_letter(library, *song.artist);
     pn();
