@@ -22,6 +22,8 @@ struct song_class {
     
     Song (*const new)(const char *const name, const char *const artist);
     
+    bool (*const is)(const Song this, const Song song);
+    
     bool (*const equals)(const Song this, const Song song);
     
     int (*const compare_to)(const Song this, const Song song);
@@ -31,6 +33,8 @@ struct song_class {
     void (*const print)(const Song this);
     
     void (*const free)(const Song this);
+    
+    void (*const free_other_song_safely)(const Song this, const Song song);
     
 };
 

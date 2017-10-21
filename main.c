@@ -2,16 +2,16 @@
 // Created by kkyse on 10/17/2017.
 //
 
-#include "main.h"
+#define MAIN_DEBUG false
 
+#include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+
 #include <assert.h>
 
 #include "song_library.h"
-
-#define DEBUG false
 
 #define p(s) printf(s"\n")
 
@@ -98,7 +98,7 @@ void test_SongNode() {
     SongLibrary *const library = SongLibraryClass.new();
     library->c->add_songs_from_default_csv(library);
     const SongNode *const all_songs = library->c->all_songs(library);
-    const Song songNew = SongClass.new("NewSong", "NewArtist");
+    const Song new_song = SongClass.new("NewSong", "NewArtist");
     
     p("Testing SongNode.length()");
     p("\tshould print 27, the number of songs in our playlist");
@@ -110,7 +110,7 @@ void test_SongNode() {
     
     p("Testing SongNode.insert_front()");
     p("\tshould have new song at the front of the library");
-    SongNode *new = all_songs->c->insert_front(all_songs, songNew);
+    SongNode *new = all_songs->c->insert_front(all_songs, new_song);
     new->c->print(new);
     pn();
     
@@ -122,7 +122,7 @@ void test_SongNode() {
     
     p("Testing SongNode.insert_in_order()");
     p("\tshould put the new song in the right place");
-    new = all_songs->c->insert_in_order(all_songs, songNew);
+    new = all_songs->c->insert_in_order(all_songs, new_song);
     new->c->print(new);
     pn();
     
@@ -171,10 +171,11 @@ void test_SongNode() {
     assert(all_songs->c->is_sorted(all_songs));
     p("Pre:");
     all_songs->c->print(all_songs);
-    p("Post:");
+    p("Running SongNode.remove_song():");
     size_t num_removed;
     SongNode *const head = (SongNode *const) all_songs;
-    all_songs->c->remove_song(head, songNew, &num_removed);
+    all_songs->c->remove_song(head, new_song, &num_removed);
+    p("Post:");
     all_songs->c->print(all_songs);
     pn();
     
@@ -185,6 +186,8 @@ void test_SongNode() {
     printf("length: %zu\n", all_songs->c->length(all_songs));
     pn();
     */
+    
+    new_song.c->free(new_song);
     
     p("Testing SongNode.free()");
     p("\tshould print a null pointer");
@@ -287,7 +290,7 @@ void test_SongLibrary() {
 int main() {
     srand((unsigned int) time(NULL));
     
-    #if (DEBUG)
+    #if (MAIN_DEBUG)
     debug_song_node();
     debug_library();
     #endif
@@ -298,5 +301,6 @@ int main() {
     return EXIT_SUCCESS;
 }
 
+#undef pt
 #undef pn
 #undef p
