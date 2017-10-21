@@ -27,35 +27,16 @@ struct song Song_new(const char *const name, const char *const artist) {
 }
 
 bool Song_equals(const struct song this, const struct song song) {
+    this.c->print(this);
+    song.c->print(song);
     return this.c->compare_to(this, song) == 0;
 }
 
-#define is_Alessia(s) ((s)[0] == 'A' && (s)[1] == 'l')
-
 int Song_compare_to(const struct song this, const struct song song) {
     const int cmp = strcmp(this.artist, song.artist);
-    #if (DEBUG)
-    //    const bool is_Alessia = strcmp(song.artist, "Alessia Cara") == 0;
-        if (is_Alessia(song.artist) || is_Alessia(this.artist)) {
-            printf("maybe\n");
-        }
-        for (int i = 0; i < strlen(this.artist); i++) {
-            printf("%d, ", this.artist[i]);
-        }
-        printf("\n[%s}\n", this.artist);
-        printf("[%s}\n", song.artist);
-        printf("%d\n\n", cmp);
-    //    printf("[%s] vs [%s]: %d\n", this.artist, song.artist, cmp);
-    #endif
     if (cmp != 0) {
         return cmp;
     }
-    #if (DEBUG)
-    printf("\ncmp by name\n");
-    printf("[%s]\n", this.name);
-    printf("[%s]\n", song.name);
-    printf("%d\n\n", strcmp(this.name, song.name));
-    #endif
     return strcmp(this.name, song.name);
 }
 

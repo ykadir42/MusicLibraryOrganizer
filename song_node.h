@@ -29,6 +29,8 @@ struct song_node_class {
     
     SongNode *(*const insert_in_order)(const SongNode *this, const Song song);
     
+    bool (*const is_sorted)(const SongNode *this);
+    
     void (*const print)(const SongNode *this);
     
     const SongNode *(*const find_by_name)(const SongNode *this, const char *const name);

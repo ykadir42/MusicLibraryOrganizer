@@ -49,6 +49,20 @@ SongNode *SongNode_insert_in_order(const SongNode *const this, const Song song) 
     return (SongNode *) this;
 }
 
+bool SongNode_is_sorted(const SongNode *this) {
+    if (!this->next) {
+        return true;
+    }
+    for (const SongNode *cur = this, *next = this->next; next; cur = next, next = next->next) {
+        const Song cur_song = cur->song;
+        const Song next_song = next->song;
+        if (cur_song.c->compare_to(cur_song, next_song) > 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void SongNode_print(const SongNode *this) {
     for (; this; this = this->next) {
         this->song.c->print(this->song);
@@ -142,6 +156,7 @@ const struct song_node_class SongNodeClass = {
         &SongNode_length,
         &SongNode_insert_front,
         &SongNode_insert_in_order,
+        &SongNode_is_sorted,
         &SongNode_print,
         &SongNode_find_by_name,
         &SongNode_find_by_artist,

@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <assert.h>
 
 #include "song_library.h"
 
@@ -167,6 +168,10 @@ void test_SongNode() {
     
     p("Testing SongNode.remove_song()");
     p("\tshould remove new song from playlist");
+    assert(all_songs->c->is_sorted(all_songs));
+    p("Pre:");
+    all_songs->c->print(all_songs);
+    p("Post:");
     size_t num_removed;
     SongNode *const head = (SongNode *const) all_songs;
     all_songs->c->remove_song(head, songNew, &num_removed);
@@ -184,7 +189,9 @@ void test_SongNode() {
     p("Testing SongNode.free()");
     p("\tshould print a null pointer");
     pt();
-    printf("%p\n", all_songs->c->free((SongNode *) all_songs));
+    printf("%p\n", all_songs->c->free_nodes_only((SongNode *) all_songs));
+    
+    library->c->free(library);
     
     p("====================");
     p("SONG LINKED LIST PASSED ALL TESTS");
