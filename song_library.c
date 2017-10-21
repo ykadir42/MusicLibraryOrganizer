@@ -27,12 +27,19 @@ SongLibrary *SongLibrary_new() {
 }
 
 const SongNode *SongLibrary_all_songs(const SongLibrary *const this) {
-    const SongNode *all_songs = NULL;
-    for (size_t i = 0; i < arraysize(this->table); ++i) {
-        for (const SongNode *head = this->table[i]; head; head = head->next) {
-            all_songs = SongNodeClass.insert_front(all_songs, head->song);
+    // put songs in a temp array first, because linked list uses reverse order
+    const Song **const songs = (const Song **) malloc(this->num_songs * sizeof(Song *));
+    for (size_t row = 0, i = 0; row < arraysize(this->table); ++row) {
+        for (const SongNode *head = this->table[row]; head; head = head->next, ++i) {
+            songs[i] = &head->song;
         }
     }
+    // add to SongNode linked list in reverse order, because using insert_front()
+    const SongNode *all_songs = NULL;
+    for (int i = (int) this->num_songs - 1; i > 0; --i) {
+        all_songs = SongNodeClass.insert_front(all_songs, *songs[i]);
+    }
+    free(songs);
     return all_songs;
 }
 

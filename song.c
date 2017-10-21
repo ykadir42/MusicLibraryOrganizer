@@ -80,6 +80,9 @@ void Song_print(const struct song this) {
 void Song_free(const struct song this) {
     free((char *) this.artist);
     free((char *) this.name);
+    // set to NULL to prevent double free()
+    *((char **) &this.artist) = NULL;
+    *((char **) &this.name) = NULL;
 }
 
 const struct song_class SongClass = {

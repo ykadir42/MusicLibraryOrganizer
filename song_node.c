@@ -34,7 +34,7 @@ SongNode *SongNode_insert_in_order(const SongNode *const this, const Song song) 
     }
     SongNode *prev = NULL;
     for (SongNode *cur = (SongNode *) this; cur; prev = cur, cur = cur->next) {
-        if (song.c->compare_to(song, cur->song) > 0) {
+        if (song.c->compare_to(song, cur->song) < 0) {
             if (!prev) {
                 return this->c->insert_front(this, song);
             } else {
