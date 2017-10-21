@@ -36,7 +36,7 @@ const SongNode *SongLibrary_all_songs(const SongLibrary *const this) {
     }
     // add to SongNode linked list in reverse order, because using insert_front()
     const SongNode *all_songs = NULL;
-    for (int i = (int) this->num_songs - 1; i > 0; --i) {
+    for (int i = (int) this->num_songs - 1; i >= 0; --i) {
         all_songs = SongNodeClass.insert_front(all_songs, *songs[i]);
     }
     free(songs);

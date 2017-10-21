@@ -6,6 +6,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 SongNode *SongNode_new(const Song song, const SongNode *const next) {
     const SongNode local = {.c = &SongNodeClass, .song = song, .next = (SongNode *const) next};
